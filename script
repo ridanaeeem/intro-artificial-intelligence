@@ -1,0 +1,33 @@
+#!/bin/bash
+
+echo "starting script..."
+
+javac -cp "./lib/*:." @infexf.srcs
+wait
+
+# set num iters to input or default to 10
+iters=${1:-10}
+
+# set update freq to input or default to 10
+n=${2:-10}
+
+# set num wins to 0
+wins=0
+
+# iterate iters times
+for ((i=1; i<=$iters; i++));
+do
+	# print every n
+	if [ $(($i % $n)) -eq 0 ]; then
+		echo "run #: $i/$iters"
+	fi
+	output=$(java -cp "./lib/*:." edu.cwru.sepia.Main2 data/labs/infexf/TwoUnitSmallMaze.xml 2> /dev/null) 
+	# if win, increment counter
+	if echo $output | grep -q "The enemy was destroyed, you win!"; then
+		((wins++))
+	fi
+done    
+
+
+echo "won $wins times out of $iters"
+echo "win percentage: $(echo "print(f'{round($wins*100/$iters, 1)}%')" | python3)"
