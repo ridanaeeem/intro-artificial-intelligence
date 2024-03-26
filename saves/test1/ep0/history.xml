@@ -34,7 +34,7 @@
                 <birthLog>
                     <newUnitID>32</newUnitID>
                     <controller>1</controller>
-                    <parentID>1013</parentID>
+                    <parentID>1014</parentID>
                 </birthLog>
             </birthLogList>
             <birthLogList>
@@ -45,7 +45,7 @@
                 <birthLog>
                     <newUnitID>33</newUnitID>
                     <controller>1</controller>
-                    <parentID>32</parentID>
+                    <parentID>1012</parentID>
                 </birthLog>
             </birthLogList>
             <birthLogList>
@@ -67,7 +67,7 @@
                 <birthLog>
                     <newUnitID>35</newUnitID>
                     <controller>1</controller>
-                    <parentID>1020</parentID>
+                    <parentID>1011</parentID>
                 </birthLog>
             </birthLogList>
             <birthLogList>
@@ -89,7 +89,7 @@
                 <birthLog>
                     <newUnitID>37</newUnitID>
                     <controller>1</controller>
-                    <parentID>35</parentID>
+                    <parentID>1011</parentID>
                 </birthLog>
             </birthLogList>
             <birthLogList>
@@ -100,7 +100,7 @@
                 <birthLog>
                     <newUnitID>38</newUnitID>
                     <controller>1</controller>
-                    <parentID>1028</parentID>
+                    <parentID>36</parentID>
                 </birthLog>
             </birthLogList>
             <birthLogList>
@@ -111,7 +111,7 @@
                 <birthLog>
                     <newUnitID>39</newUnitID>
                     <controller>1</controller>
-                    <parentID>38</parentID>
+                    <parentID>1028</parentID>
                 </birthLog>
             </birthLogList>
             <birthLogList>
@@ -132,6 +132,17 @@
                 <roundNumber>23</roundNumber>
                 <birthLog>
                     <newUnitID>41</newUnitID>
+                    <controller>1</controller>
+                    <parentID>34</parentID>
+                </birthLog>
+            </birthLogList>
+            <birthLogList>
+                <roundNumber>24</roundNumber>
+            </birthLogList>
+            <birthLogList>
+                <roundNumber>25</roundNumber>
+                <birthLog>
+                    <newUnitID>42</newUnitID>
                     <controller>1</controller>
                     <parentID>1036</parentID>
                 </birthLog>
@@ -159,7 +170,7 @@
             <deathLogList>
                 <roundNumber>4</roundNumber>
                 <deathLog>
-                    <deadUnitID>1014</deadUnitID>
+                    <deadUnitID>1015</deadUnitID>
                     <controller>1</controller>
                 </deathLog>
             </deathLogList>
@@ -169,7 +180,7 @@
             <deathLogList>
                 <roundNumber>6</roundNumber>
                 <deathLog>
-                    <deadUnitID>1015</deadUnitID>
+                    <deadUnitID>1005</deadUnitID>
                     <controller>1</controller>
                 </deathLog>
             </deathLogList>
@@ -189,7 +200,7 @@
             <deathLogList>
                 <roundNumber>10</roundNumber>
                 <deathLog>
-                    <deadUnitID>1021</deadUnitID>
+                    <deadUnitID>1012</deadUnitID>
                     <controller>1</controller>
                 </deathLog>
             </deathLogList>
@@ -209,7 +220,7 @@
             <deathLogList>
                 <roundNumber>14</roundNumber>
                 <deathLog>
-                    <deadUnitID>1022</deadUnitID>
+                    <deadUnitID>1004</deadUnitID>
                     <controller>1</controller>
                 </deathLog>
             </deathLogList>
@@ -219,7 +230,7 @@
             <deathLogList>
                 <roundNumber>16</roundNumber>
                 <deathLog>
-                    <deadUnitID>1029</deadUnitID>
+                    <deadUnitID>1021</deadUnitID>
                     <controller>1</controller>
                 </deathLog>
             </deathLogList>
@@ -229,7 +240,7 @@
             <deathLogList>
                 <roundNumber>18</roundNumber>
                 <deathLog>
-                    <deadUnitID>1030</deadUnitID>
+                    <deadUnitID>1029</deadUnitID>
                     <controller>1</controller>
                 </deathLog>
             </deathLogList>
@@ -239,7 +250,7 @@
             <deathLogList>
                 <roundNumber>20</roundNumber>
                 <deathLog>
-                    <deadUnitID>1031</deadUnitID>
+                    <deadUnitID>1030</deadUnitID>
                     <controller>1</controller>
                 </deathLog>
             </deathLogList>
@@ -249,7 +260,7 @@
             <deathLogList>
                 <roundNumber>22</roundNumber>
                 <deathLog>
-                    <deadUnitID>1037</deadUnitID>
+                    <deadUnitID>1014</deadUnitID>
                     <controller>1</controller>
                 </deathLog>
             </deathLogList>
@@ -259,11 +270,21 @@
             <deathLogList>
                 <roundNumber>24</roundNumber>
                 <deathLog>
+                    <deadUnitID>1037</deadUnitID>
+                    <controller>1</controller>
+                </deathLog>
+            </deathLogList>
+            <deathLogList>
+                <roundNumber>25</roundNumber>
+            </deathLogList>
+            <deathLogList>
+                <roundNumber>26</roundNumber>
+                <deathLog>
                     <deadUnitID>5000</deadUnitID>
                     <controller>0</controller>
                 </deathLog>
                 <deathLog>
-                    <deadUnitID>1036</deadUnitID>
+                    <deadUnitID>1003</deadUnitID>
                     <controller>1</controller>
                 </deathLog>
             </deathLogList>
@@ -298,7 +319,7 @@
                 <damageLog>
                     <attackerID>5000</attackerID>
                     <attackerController>0</attackerController>
-                    <defenderID>1014</defenderID>
+                    <defenderID>1015</defenderID>
                     <defenderController>1</defenderController>
                     <damage>437</damage>
                 </damageLog>
@@ -311,7 +332,7 @@
                 <damageLog>
                     <attackerID>5000</attackerID>
                     <attackerController>0</attackerController>
-                    <defenderID>1015</defenderID>
+                    <defenderID>1005</defenderID>
                     <defenderController>1</defenderController>
                     <damage>289</damage>
                 </damageLog>
@@ -337,7 +358,7 @@
                 <damageLog>
                     <attackerID>5000</attackerID>
                     <attackerController>0</attackerController>
-                    <defenderID>1021</defenderID>
+                    <defenderID>1012</defenderID>
                     <defenderController>1</defenderController>
                     <damage>384</damage>
                 </damageLog>
@@ -363,7 +384,7 @@
                 <damageLog>
                     <attackerID>5000</attackerID>
                     <attackerController>0</attackerController>
-                    <defenderID>1022</defenderID>
+                    <defenderID>1004</defenderID>
                     <defenderController>1</defenderController>
                     <damage>243</damage>
                 </damageLog>
@@ -376,7 +397,7 @@
                 <damageLog>
                     <attackerID>5000</attackerID>
                     <attackerController>0</attackerController>
-                    <defenderID>1029</defenderID>
+                    <defenderID>1021</defenderID>
                     <defenderController>1</defenderController>
                     <damage>267</damage>
                 </damageLog>
@@ -389,7 +410,7 @@
                 <damageLog>
                     <attackerID>5000</attackerID>
                     <attackerController>0</attackerController>
-                    <defenderID>1030</defenderID>
+                    <defenderID>1029</defenderID>
                     <defenderController>1</defenderController>
                     <damage>433</damage>
                 </damageLog>
@@ -402,7 +423,7 @@
                 <damageLog>
                     <attackerID>5000</attackerID>
                     <attackerController>0</attackerController>
-                    <defenderID>1031</defenderID>
+                    <defenderID>1030</defenderID>
                     <defenderController>1</defenderController>
                     <damage>373</damage>
                 </damageLog>
@@ -415,7 +436,7 @@
                 <damageLog>
                     <attackerID>5000</attackerID>
                     <attackerController>0</attackerController>
-                    <defenderID>1037</defenderID>
+                    <defenderID>1014</defenderID>
                     <defenderController>1</defenderController>
                     <damage>227</damage>
                 </damageLog>
@@ -428,16 +449,29 @@
                 <damageLog>
                     <attackerID>5000</attackerID>
                     <attackerController>0</attackerController>
-                    <defenderID>1036</defenderID>
+                    <defenderID>1037</defenderID>
                     <defenderController>1</defenderController>
                     <damage>372</damage>
                 </damageLog>
+            </damageLogList>
+            <damageLogList>
+                <roundNumber>25</roundNumber>
+            </damageLogList>
+            <damageLogList>
+                <roundNumber>26</roundNumber>
                 <damageLog>
-                    <attackerID>41</attackerID>
+                    <attackerID>5000</attackerID>
+                    <attackerController>0</attackerController>
+                    <defenderID>1003</defenderID>
+                    <defenderController>1</defenderController>
+                    <damage>360</damage>
+                </damageLog>
+                <damageLog>
+                    <attackerID>42</attackerID>
                     <attackerController>1</attackerController>
                     <defenderID>5000</defenderID>
                     <defenderController>0</defenderController>
-                    <damage>1105</damage>
+                    <damage>1146</damage>
                 </damageLog>
             </damageLogList>
         </eventLogger>
@@ -477,7 +511,7 @@
                     <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                         <unitId>5000</unitId>
                         <actionType>PRIMITIVEATTACK</actionType>
-                        <targetId>1014</targetId>
+                        <targetId>1015</targetId>
                     </action>
                 </actionEntry>
             </actionList>
@@ -491,7 +525,7 @@
                     <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                         <unitId>5000</unitId>
                         <actionType>PRIMITIVEATTACK</actionType>
-                        <targetId>1015</targetId>
+                        <targetId>1005</targetId>
                     </action>
                 </actionEntry>
             </actionList>
@@ -519,7 +553,7 @@
                     <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                         <unitId>5000</unitId>
                         <actionType>PRIMITIVEATTACK</actionType>
-                        <targetId>1021</targetId>
+                        <targetId>1012</targetId>
                     </action>
                 </actionEntry>
             </actionList>
@@ -547,7 +581,7 @@
                     <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                         <unitId>5000</unitId>
                         <actionType>PRIMITIVEATTACK</actionType>
-                        <targetId>1022</targetId>
+                        <targetId>1004</targetId>
                     </action>
                 </actionEntry>
             </actionList>
@@ -561,7 +595,7 @@
                     <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                         <unitId>5000</unitId>
                         <actionType>PRIMITIVEATTACK</actionType>
-                        <targetId>1029</targetId>
+                        <targetId>1021</targetId>
                     </action>
                 </actionEntry>
             </actionList>
@@ -575,7 +609,7 @@
                     <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                         <unitId>5000</unitId>
                         <actionType>PRIMITIVEATTACK</actionType>
-                        <targetId>1030</targetId>
+                        <targetId>1029</targetId>
                     </action>
                 </actionEntry>
             </actionList>
@@ -589,7 +623,7 @@
                     <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                         <unitId>5000</unitId>
                         <actionType>PRIMITIVEATTACK</actionType>
-                        <targetId>1031</targetId>
+                        <targetId>1030</targetId>
                     </action>
                 </actionEntry>
             </actionList>
@@ -603,7 +637,7 @@
                     <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                         <unitId>5000</unitId>
                         <actionType>PRIMITIVEATTACK</actionType>
-                        <targetId>1037</targetId>
+                        <targetId>1014</targetId>
                     </action>
                 </actionEntry>
             </actionList>
@@ -617,7 +651,21 @@
                     <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                         <unitId>5000</unitId>
                         <actionType>PRIMITIVEATTACK</actionType>
-                        <targetId>1036</targetId>
+                        <targetId>1037</targetId>
+                    </action>
+                </actionEntry>
+            </actionList>
+            <actionList>
+                <roundNumber>25</roundNumber>
+            </actionList>
+            <actionList>
+                <roundNumber>26</roundNumber>
+                <actionEntry>
+                    <unitID>5000</unitID>
+                    <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                        <unitId>5000</unitId>
+                        <actionType>PRIMITIVEATTACK</actionType>
+                        <targetId>1003</targetId>
                     </action>
                 </actionEntry>
             </actionList>
@@ -665,7 +713,7 @@
                         <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                             <unitId>5000</unitId>
                             <actionType>PRIMITIVEATTACK</actionType>
-                            <targetId>1014</targetId>
+                            <targetId>1015</targetId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
@@ -682,7 +730,7 @@
                         <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                             <unitId>5000</unitId>
                             <actionType>PRIMITIVEATTACK</actionType>
-                            <targetId>1015</targetId>
+                            <targetId>1005</targetId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
@@ -716,7 +764,7 @@
                         <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                             <unitId>5000</unitId>
                             <actionType>PRIMITIVEATTACK</actionType>
-                            <targetId>1021</targetId>
+                            <targetId>1012</targetId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
@@ -750,7 +798,7 @@
                         <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                             <unitId>5000</unitId>
                             <actionType>PRIMITIVEATTACK</actionType>
-                            <targetId>1022</targetId>
+                            <targetId>1004</targetId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
@@ -767,7 +815,7 @@
                         <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                             <unitId>5000</unitId>
                             <actionType>PRIMITIVEATTACK</actionType>
-                            <targetId>1029</targetId>
+                            <targetId>1021</targetId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
@@ -784,7 +832,7 @@
                         <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                             <unitId>5000</unitId>
                             <actionType>PRIMITIVEATTACK</actionType>
-                            <targetId>1030</targetId>
+                            <targetId>1029</targetId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
@@ -801,7 +849,7 @@
                         <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                             <unitId>5000</unitId>
                             <actionType>PRIMITIVEATTACK</actionType>
-                            <targetId>1031</targetId>
+                            <targetId>1030</targetId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
@@ -818,7 +866,7 @@
                         <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                             <unitId>5000</unitId>
                             <actionType>PRIMITIVEATTACK</actionType>
-                            <targetId>1037</targetId>
+                            <targetId>1014</targetId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
@@ -835,7 +883,24 @@
                         <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                             <unitId>5000</unitId>
                             <actionType>PRIMITIVEATTACK</actionType>
-                            <targetId>1036</targetId>
+                            <targetId>1037</targetId>
+                        </action>
+                        <feedback>COMPLETED</feedback>
+                    </actionResult>
+                </actionResultEntry>
+            </actionResultList>
+            <actionResultList>
+                <roundNumber>25</roundNumber>
+            </actionResultList>
+            <actionResultList>
+                <roundNumber>26</roundNumber>
+                <actionResultEntry>
+                    <unitID>5000</unitID>
+                    <actionResult>
+                        <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                            <unitId>5000</unitId>
+                            <actionType>PRIMITIVEATTACK</actionType>
+                            <targetId>1003</targetId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
@@ -885,7 +950,7 @@
                         <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                             <unitId>5000</unitId>
                             <actionType>PRIMITIVEATTACK</actionType>
-                            <targetId>1014</targetId>
+                            <targetId>1015</targetId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
@@ -902,7 +967,7 @@
                         <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                             <unitId>5000</unitId>
                             <actionType>PRIMITIVEATTACK</actionType>
-                            <targetId>1015</targetId>
+                            <targetId>1005</targetId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
@@ -936,7 +1001,7 @@
                         <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                             <unitId>5000</unitId>
                             <actionType>PRIMITIVEATTACK</actionType>
-                            <targetId>1021</targetId>
+                            <targetId>1012</targetId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
@@ -970,7 +1035,7 @@
                         <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                             <unitId>5000</unitId>
                             <actionType>PRIMITIVEATTACK</actionType>
-                            <targetId>1022</targetId>
+                            <targetId>1004</targetId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
@@ -987,7 +1052,7 @@
                         <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                             <unitId>5000</unitId>
                             <actionType>PRIMITIVEATTACK</actionType>
-                            <targetId>1029</targetId>
+                            <targetId>1021</targetId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
@@ -1004,7 +1069,7 @@
                         <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                             <unitId>5000</unitId>
                             <actionType>PRIMITIVEATTACK</actionType>
-                            <targetId>1030</targetId>
+                            <targetId>1029</targetId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
@@ -1021,7 +1086,7 @@
                         <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                             <unitId>5000</unitId>
                             <actionType>PRIMITIVEATTACK</actionType>
-                            <targetId>1031</targetId>
+                            <targetId>1030</targetId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
@@ -1038,7 +1103,7 @@
                         <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                             <unitId>5000</unitId>
                             <actionType>PRIMITIVEATTACK</actionType>
-                            <targetId>1037</targetId>
+                            <targetId>1014</targetId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
@@ -1055,7 +1120,24 @@
                         <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                             <unitId>5000</unitId>
                             <actionType>PRIMITIVEATTACK</actionType>
-                            <targetId>1036</targetId>
+                            <targetId>1037</targetId>
+                        </action>
+                        <feedback>COMPLETED</feedback>
+                    </actionResult>
+                </actionResultEntry>
+            </actionResultList>
+            <actionResultList>
+                <roundNumber>25</roundNumber>
+            </actionResultList>
+            <actionResultList>
+                <roundNumber>26</roundNumber>
+                <actionResultEntry>
+                    <unitID>5000</unitID>
+                    <actionResult>
+                        <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                            <unitId>5000</unitId>
+                            <actionType>PRIMITIVEATTACK</actionType>
+                            <targetId>1003</targetId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
@@ -1096,7 +1178,7 @@
                 <birthLog>
                     <newUnitID>32</newUnitID>
                     <controller>1</controller>
-                    <parentID>1013</parentID>
+                    <parentID>1014</parentID>
                 </birthLog>
             </birthLogList>
             <birthLogList>
@@ -1107,7 +1189,7 @@
                 <birthLog>
                     <newUnitID>33</newUnitID>
                     <controller>1</controller>
-                    <parentID>32</parentID>
+                    <parentID>1012</parentID>
                 </birthLog>
             </birthLogList>
             <birthLogList>
@@ -1129,7 +1211,7 @@
                 <birthLog>
                     <newUnitID>35</newUnitID>
                     <controller>1</controller>
-                    <parentID>1020</parentID>
+                    <parentID>1011</parentID>
                 </birthLog>
             </birthLogList>
             <birthLogList>
@@ -1151,7 +1233,7 @@
                 <birthLog>
                     <newUnitID>37</newUnitID>
                     <controller>1</controller>
-                    <parentID>35</parentID>
+                    <parentID>1011</parentID>
                 </birthLog>
             </birthLogList>
             <birthLogList>
@@ -1162,7 +1244,7 @@
                 <birthLog>
                     <newUnitID>38</newUnitID>
                     <controller>1</controller>
-                    <parentID>1028</parentID>
+                    <parentID>36</parentID>
                 </birthLog>
             </birthLogList>
             <birthLogList>
@@ -1173,7 +1255,7 @@
                 <birthLog>
                     <newUnitID>39</newUnitID>
                     <controller>1</controller>
-                    <parentID>38</parentID>
+                    <parentID>1028</parentID>
                 </birthLog>
             </birthLogList>
             <birthLogList>
@@ -1194,6 +1276,17 @@
                 <roundNumber>23</roundNumber>
                 <birthLog>
                     <newUnitID>41</newUnitID>
+                    <controller>1</controller>
+                    <parentID>34</parentID>
+                </birthLog>
+            </birthLogList>
+            <birthLogList>
+                <roundNumber>24</roundNumber>
+            </birthLogList>
+            <birthLogList>
+                <roundNumber>25</roundNumber>
+                <birthLog>
+                    <newUnitID>42</newUnitID>
                     <controller>1</controller>
                     <parentID>1036</parentID>
                 </birthLog>
@@ -1221,7 +1314,7 @@
             <deathLogList>
                 <roundNumber>4</roundNumber>
                 <deathLog>
-                    <deadUnitID>1014</deadUnitID>
+                    <deadUnitID>1015</deadUnitID>
                     <controller>1</controller>
                 </deathLog>
             </deathLogList>
@@ -1231,7 +1324,7 @@
             <deathLogList>
                 <roundNumber>6</roundNumber>
                 <deathLog>
-                    <deadUnitID>1015</deadUnitID>
+                    <deadUnitID>1005</deadUnitID>
                     <controller>1</controller>
                 </deathLog>
             </deathLogList>
@@ -1251,7 +1344,7 @@
             <deathLogList>
                 <roundNumber>10</roundNumber>
                 <deathLog>
-                    <deadUnitID>1021</deadUnitID>
+                    <deadUnitID>1012</deadUnitID>
                     <controller>1</controller>
                 </deathLog>
             </deathLogList>
@@ -1271,7 +1364,7 @@
             <deathLogList>
                 <roundNumber>14</roundNumber>
                 <deathLog>
-                    <deadUnitID>1022</deadUnitID>
+                    <deadUnitID>1004</deadUnitID>
                     <controller>1</controller>
                 </deathLog>
             </deathLogList>
@@ -1281,7 +1374,7 @@
             <deathLogList>
                 <roundNumber>16</roundNumber>
                 <deathLog>
-                    <deadUnitID>1029</deadUnitID>
+                    <deadUnitID>1021</deadUnitID>
                     <controller>1</controller>
                 </deathLog>
             </deathLogList>
@@ -1291,7 +1384,7 @@
             <deathLogList>
                 <roundNumber>18</roundNumber>
                 <deathLog>
-                    <deadUnitID>1030</deadUnitID>
+                    <deadUnitID>1029</deadUnitID>
                     <controller>1</controller>
                 </deathLog>
             </deathLogList>
@@ -1301,7 +1394,7 @@
             <deathLogList>
                 <roundNumber>20</roundNumber>
                 <deathLog>
-                    <deadUnitID>1031</deadUnitID>
+                    <deadUnitID>1030</deadUnitID>
                     <controller>1</controller>
                 </deathLog>
             </deathLogList>
@@ -1311,7 +1404,7 @@
             <deathLogList>
                 <roundNumber>22</roundNumber>
                 <deathLog>
-                    <deadUnitID>1037</deadUnitID>
+                    <deadUnitID>1014</deadUnitID>
                     <controller>1</controller>
                 </deathLog>
             </deathLogList>
@@ -1321,11 +1414,21 @@
             <deathLogList>
                 <roundNumber>24</roundNumber>
                 <deathLog>
+                    <deadUnitID>1037</deadUnitID>
+                    <controller>1</controller>
+                </deathLog>
+            </deathLogList>
+            <deathLogList>
+                <roundNumber>25</roundNumber>
+            </deathLogList>
+            <deathLogList>
+                <roundNumber>26</roundNumber>
+                <deathLog>
                     <deadUnitID>5000</deadUnitID>
                     <controller>0</controller>
                 </deathLog>
                 <deathLog>
-                    <deadUnitID>1036</deadUnitID>
+                    <deadUnitID>1003</deadUnitID>
                     <controller>1</controller>
                 </deathLog>
             </deathLogList>
@@ -1360,7 +1463,7 @@
                 <damageLog>
                     <attackerID>5000</attackerID>
                     <attackerController>0</attackerController>
-                    <defenderID>1014</defenderID>
+                    <defenderID>1015</defenderID>
                     <defenderController>1</defenderController>
                     <damage>437</damage>
                 </damageLog>
@@ -1373,7 +1476,7 @@
                 <damageLog>
                     <attackerID>5000</attackerID>
                     <attackerController>0</attackerController>
-                    <defenderID>1015</defenderID>
+                    <defenderID>1005</defenderID>
                     <defenderController>1</defenderController>
                     <damage>289</damage>
                 </damageLog>
@@ -1399,7 +1502,7 @@
                 <damageLog>
                     <attackerID>5000</attackerID>
                     <attackerController>0</attackerController>
-                    <defenderID>1021</defenderID>
+                    <defenderID>1012</defenderID>
                     <defenderController>1</defenderController>
                     <damage>384</damage>
                 </damageLog>
@@ -1425,7 +1528,7 @@
                 <damageLog>
                     <attackerID>5000</attackerID>
                     <attackerController>0</attackerController>
-                    <defenderID>1022</defenderID>
+                    <defenderID>1004</defenderID>
                     <defenderController>1</defenderController>
                     <damage>243</damage>
                 </damageLog>
@@ -1438,7 +1541,7 @@
                 <damageLog>
                     <attackerID>5000</attackerID>
                     <attackerController>0</attackerController>
-                    <defenderID>1029</defenderID>
+                    <defenderID>1021</defenderID>
                     <defenderController>1</defenderController>
                     <damage>267</damage>
                 </damageLog>
@@ -1451,7 +1554,7 @@
                 <damageLog>
                     <attackerID>5000</attackerID>
                     <attackerController>0</attackerController>
-                    <defenderID>1030</defenderID>
+                    <defenderID>1029</defenderID>
                     <defenderController>1</defenderController>
                     <damage>433</damage>
                 </damageLog>
@@ -1464,7 +1567,7 @@
                 <damageLog>
                     <attackerID>5000</attackerID>
                     <attackerController>0</attackerController>
-                    <defenderID>1031</defenderID>
+                    <defenderID>1030</defenderID>
                     <defenderController>1</defenderController>
                     <damage>373</damage>
                 </damageLog>
@@ -1477,7 +1580,7 @@
                 <damageLog>
                     <attackerID>5000</attackerID>
                     <attackerController>0</attackerController>
-                    <defenderID>1037</defenderID>
+                    <defenderID>1014</defenderID>
                     <defenderController>1</defenderController>
                     <damage>227</damage>
                 </damageLog>
@@ -1490,16 +1593,29 @@
                 <damageLog>
                     <attackerID>5000</attackerID>
                     <attackerController>0</attackerController>
-                    <defenderID>1036</defenderID>
+                    <defenderID>1037</defenderID>
                     <defenderController>1</defenderController>
                     <damage>372</damage>
                 </damageLog>
+            </damageLogList>
+            <damageLogList>
+                <roundNumber>25</roundNumber>
+            </damageLogList>
+            <damageLogList>
+                <roundNumber>26</roundNumber>
                 <damageLog>
-                    <attackerID>41</attackerID>
+                    <attackerID>5000</attackerID>
+                    <attackerController>0</attackerController>
+                    <defenderID>1003</defenderID>
+                    <defenderController>1</defenderController>
+                    <damage>360</damage>
+                </damageLog>
+                <damageLog>
+                    <attackerID>42</attackerID>
                     <attackerController>1</attackerController>
                     <defenderID>5000</defenderID>
                     <defenderController>0</defenderController>
-                    <damage>1105</damage>
+                    <damage>1146</damage>
                 </damageLog>
             </damageLogList>
         </eventLogger>
@@ -1538,9 +1654,9 @@
             <actionList>
                 <roundNumber>5</roundNumber>
                 <actionEntry>
-                    <unitID>1013</unitID>
+                    <unitID>1014</unitID>
                     <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                        <unitId>1013</unitId>
+                        <unitId>1014</unitId>
                         <actionType>PRIMITIVEBUILD</actionType>
                         <templateId>3000</templateId>
                     </action>
@@ -1552,9 +1668,9 @@
             <actionList>
                 <roundNumber>7</roundNumber>
                 <actionEntry>
-                    <unitID>32</unitID>
+                    <unitID>1012</unitID>
                     <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                        <unitId>32</unitId>
+                        <unitId>1012</unitId>
                         <actionType>PRIMITIVEBUILD</actionType>
                         <templateId>3000</templateId>
                     </action>
@@ -1580,9 +1696,9 @@
             <actionList>
                 <roundNumber>11</roundNumber>
                 <actionEntry>
-                    <unitID>1020</unitID>
+                    <unitID>1011</unitID>
                     <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                        <unitId>1020</unitId>
+                        <unitId>1011</unitId>
                         <actionType>PRIMITIVEBUILD</actionType>
                         <templateId>3000</templateId>
                     </action>
@@ -1608,11 +1724,11 @@
             <actionList>
                 <roundNumber>15</roundNumber>
                 <actionEntry>
-                    <unitID>35</unitID>
+                    <unitID>1011</unitID>
                     <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                        <unitId>35</unitId>
+                        <unitId>1011</unitId>
                         <actionType>PRIMITIVEBUILD</actionType>
-                        <templateId>3000</templateId>
+                        <templateId>3001</templateId>
                     </action>
                 </actionEntry>
             </actionList>
@@ -1622,11 +1738,11 @@
             <actionList>
                 <roundNumber>17</roundNumber>
                 <actionEntry>
-                    <unitID>1028</unitID>
+                    <unitID>36</unitID>
                     <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                        <unitId>1028</unitId>
+                        <unitId>36</unitId>
                         <actionType>PRIMITIVEBUILD</actionType>
-                        <templateId>3001</templateId>
+                        <templateId>3000</templateId>
                     </action>
                 </actionEntry>
             </actionList>
@@ -1636,9 +1752,9 @@
             <actionList>
                 <roundNumber>19</roundNumber>
                 <actionEntry>
-                    <unitID>38</unitID>
+                    <unitID>1028</unitID>
                     <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                        <unitId>38</unitId>
+                        <unitId>1028</unitId>
                         <actionType>PRIMITIVEBUILD</actionType>
                         <templateId>3001</templateId>
                     </action>
@@ -1654,7 +1770,7 @@
                     <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                         <unitId>39</unitId>
                         <actionType>PRIMITIVEBUILD</actionType>
-                        <templateId>3000</templateId>
+                        <templateId>3001</templateId>
                     </action>
                 </actionEntry>
             </actionList>
@@ -1663,6 +1779,20 @@
             </actionList>
             <actionList>
                 <roundNumber>23</roundNumber>
+                <actionEntry>
+                    <unitID>34</unitID>
+                    <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                        <unitId>34</unitId>
+                        <actionType>PRIMITIVEBUILD</actionType>
+                        <templateId>3000</templateId>
+                    </action>
+                </actionEntry>
+            </actionList>
+            <actionList>
+                <roundNumber>24</roundNumber>
+            </actionList>
+            <actionList>
+                <roundNumber>25</roundNumber>
                 <actionEntry>
                     <unitID>1036</unitID>
                     <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -1673,11 +1803,11 @@
                 </actionEntry>
             </actionList>
             <actionList>
-                <roundNumber>24</roundNumber>
+                <roundNumber>26</roundNumber>
                 <actionEntry>
-                    <unitID>41</unitID>
+                    <unitID>42</unitID>
                     <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                        <unitId>41</unitId>
+                        <unitId>42</unitId>
                         <actionType>PRIMITIVEATTACK</actionType>
                         <targetId>5000</targetId>
                     </action>
@@ -1725,10 +1855,10 @@
             <actionResultList>
                 <roundNumber>5</roundNumber>
                 <actionResultEntry>
-                    <unitID>1013</unitID>
+                    <unitID>1014</unitID>
                     <actionResult>
                         <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                            <unitId>1013</unitId>
+                            <unitId>1014</unitId>
                             <actionType>PRIMITIVEBUILD</actionType>
                             <templateId>3000</templateId>
                         </action>
@@ -1742,10 +1872,10 @@
             <actionResultList>
                 <roundNumber>7</roundNumber>
                 <actionResultEntry>
-                    <unitID>32</unitID>
+                    <unitID>1012</unitID>
                     <actionResult>
                         <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                            <unitId>32</unitId>
+                            <unitId>1012</unitId>
                             <actionType>PRIMITIVEBUILD</actionType>
                             <templateId>3000</templateId>
                         </action>
@@ -1776,10 +1906,10 @@
             <actionResultList>
                 <roundNumber>11</roundNumber>
                 <actionResultEntry>
-                    <unitID>1020</unitID>
+                    <unitID>1011</unitID>
                     <actionResult>
                         <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                            <unitId>1020</unitId>
+                            <unitId>1011</unitId>
                             <actionType>PRIMITIVEBUILD</actionType>
                             <templateId>3000</templateId>
                         </action>
@@ -1810,12 +1940,12 @@
             <actionResultList>
                 <roundNumber>15</roundNumber>
                 <actionResultEntry>
-                    <unitID>35</unitID>
+                    <unitID>1011</unitID>
                     <actionResult>
                         <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                            <unitId>35</unitId>
+                            <unitId>1011</unitId>
                             <actionType>PRIMITIVEBUILD</actionType>
-                            <templateId>3000</templateId>
+                            <templateId>3001</templateId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
@@ -1827,12 +1957,12 @@
             <actionResultList>
                 <roundNumber>17</roundNumber>
                 <actionResultEntry>
-                    <unitID>1028</unitID>
+                    <unitID>36</unitID>
                     <actionResult>
                         <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                            <unitId>1028</unitId>
+                            <unitId>36</unitId>
                             <actionType>PRIMITIVEBUILD</actionType>
-                            <templateId>3001</templateId>
+                            <templateId>3000</templateId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
@@ -1844,10 +1974,10 @@
             <actionResultList>
                 <roundNumber>19</roundNumber>
                 <actionResultEntry>
-                    <unitID>38</unitID>
+                    <unitID>1028</unitID>
                     <actionResult>
                         <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                            <unitId>38</unitId>
+                            <unitId>1028</unitId>
                             <actionType>PRIMITIVEBUILD</actionType>
                             <templateId>3001</templateId>
                         </action>
@@ -1866,7 +1996,7 @@
                         <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                             <unitId>39</unitId>
                             <actionType>PRIMITIVEBUILD</actionType>
-                            <templateId>3000</templateId>
+                            <templateId>3001</templateId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
@@ -1877,6 +2007,23 @@
             </actionResultList>
             <actionResultList>
                 <roundNumber>23</roundNumber>
+                <actionResultEntry>
+                    <unitID>34</unitID>
+                    <actionResult>
+                        <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                            <unitId>34</unitId>
+                            <actionType>PRIMITIVEBUILD</actionType>
+                            <templateId>3000</templateId>
+                        </action>
+                        <feedback>COMPLETED</feedback>
+                    </actionResult>
+                </actionResultEntry>
+            </actionResultList>
+            <actionResultList>
+                <roundNumber>24</roundNumber>
+            </actionResultList>
+            <actionResultList>
+                <roundNumber>25</roundNumber>
                 <actionResultEntry>
                     <unitID>1036</unitID>
                     <actionResult>
@@ -1890,12 +2037,12 @@
                 </actionResultEntry>
             </actionResultList>
             <actionResultList>
-                <roundNumber>24</roundNumber>
+                <roundNumber>26</roundNumber>
                 <actionResultEntry>
-                    <unitID>41</unitID>
+                    <unitID>42</unitID>
                     <actionResult>
                         <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                            <unitId>41</unitId>
+                            <unitId>42</unitId>
                             <actionType>PRIMITIVEATTACK</actionType>
                             <targetId>5000</targetId>
                         </action>
@@ -1945,10 +2092,10 @@
             <actionResultList>
                 <roundNumber>5</roundNumber>
                 <actionResultEntry>
-                    <unitID>1013</unitID>
+                    <unitID>1014</unitID>
                     <actionResult>
                         <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                            <unitId>1013</unitId>
+                            <unitId>1014</unitId>
                             <actionType>PRIMITIVEBUILD</actionType>
                             <templateId>3000</templateId>
                         </action>
@@ -1962,10 +2109,10 @@
             <actionResultList>
                 <roundNumber>7</roundNumber>
                 <actionResultEntry>
-                    <unitID>32</unitID>
+                    <unitID>1012</unitID>
                     <actionResult>
                         <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                            <unitId>32</unitId>
+                            <unitId>1012</unitId>
                             <actionType>PRIMITIVEBUILD</actionType>
                             <templateId>3000</templateId>
                         </action>
@@ -1996,10 +2143,10 @@
             <actionResultList>
                 <roundNumber>11</roundNumber>
                 <actionResultEntry>
-                    <unitID>1020</unitID>
+                    <unitID>1011</unitID>
                     <actionResult>
                         <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                            <unitId>1020</unitId>
+                            <unitId>1011</unitId>
                             <actionType>PRIMITIVEBUILD</actionType>
                             <templateId>3000</templateId>
                         </action>
@@ -2030,12 +2177,12 @@
             <actionResultList>
                 <roundNumber>15</roundNumber>
                 <actionResultEntry>
-                    <unitID>35</unitID>
+                    <unitID>1011</unitID>
                     <actionResult>
                         <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                            <unitId>35</unitId>
+                            <unitId>1011</unitId>
                             <actionType>PRIMITIVEBUILD</actionType>
-                            <templateId>3000</templateId>
+                            <templateId>3001</templateId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
@@ -2047,12 +2194,12 @@
             <actionResultList>
                 <roundNumber>17</roundNumber>
                 <actionResultEntry>
-                    <unitID>1028</unitID>
+                    <unitID>36</unitID>
                     <actionResult>
                         <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                            <unitId>1028</unitId>
+                            <unitId>36</unitId>
                             <actionType>PRIMITIVEBUILD</actionType>
-                            <templateId>3001</templateId>
+                            <templateId>3000</templateId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
@@ -2064,10 +2211,10 @@
             <actionResultList>
                 <roundNumber>19</roundNumber>
                 <actionResultEntry>
-                    <unitID>38</unitID>
+                    <unitID>1028</unitID>
                     <actionResult>
                         <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                            <unitId>38</unitId>
+                            <unitId>1028</unitId>
                             <actionType>PRIMITIVEBUILD</actionType>
                             <templateId>3001</templateId>
                         </action>
@@ -2086,7 +2233,7 @@
                         <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                             <unitId>39</unitId>
                             <actionType>PRIMITIVEBUILD</actionType>
-                            <templateId>3000</templateId>
+                            <templateId>3001</templateId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
@@ -2097,6 +2244,23 @@
             </actionResultList>
             <actionResultList>
                 <roundNumber>23</roundNumber>
+                <actionResultEntry>
+                    <unitID>34</unitID>
+                    <actionResult>
+                        <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                            <unitId>34</unitId>
+                            <actionType>PRIMITIVEBUILD</actionType>
+                            <templateId>3000</templateId>
+                        </action>
+                        <feedback>COMPLETED</feedback>
+                    </actionResult>
+                </actionResultEntry>
+            </actionResultList>
+            <actionResultList>
+                <roundNumber>24</roundNumber>
+            </actionResultList>
+            <actionResultList>
+                <roundNumber>25</roundNumber>
                 <actionResultEntry>
                     <unitID>1036</unitID>
                     <actionResult>
@@ -2110,12 +2274,12 @@
                 </actionResultEntry>
             </actionResultList>
             <actionResultList>
-                <roundNumber>24</roundNumber>
+                <roundNumber>26</roundNumber>
                 <actionResultEntry>
-                    <unitID>41</unitID>
+                    <unitID>42</unitID>
                     <actionResult>
                         <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                            <unitId>41</unitId>
+                            <unitId>42</unitId>
                             <actionType>PRIMITIVEATTACK</actionType>
                             <targetId>5000</targetId>
                         </action>
@@ -2158,7 +2322,7 @@
                 <birthLog>
                     <newUnitID>32</newUnitID>
                     <controller>1</controller>
-                    <parentID>1013</parentID>
+                    <parentID>1014</parentID>
                 </birthLog>
             </birthLogList>
             <birthLogList>
@@ -2169,7 +2333,7 @@
                 <birthLog>
                     <newUnitID>33</newUnitID>
                     <controller>1</controller>
-                    <parentID>32</parentID>
+                    <parentID>1012</parentID>
                 </birthLog>
             </birthLogList>
             <birthLogList>
@@ -2191,7 +2355,7 @@
                 <birthLog>
                     <newUnitID>35</newUnitID>
                     <controller>1</controller>
-                    <parentID>1020</parentID>
+                    <parentID>1011</parentID>
                 </birthLog>
             </birthLogList>
             <birthLogList>
@@ -2213,7 +2377,7 @@
                 <birthLog>
                     <newUnitID>37</newUnitID>
                     <controller>1</controller>
-                    <parentID>35</parentID>
+                    <parentID>1011</parentID>
                 </birthLog>
             </birthLogList>
             <birthLogList>
@@ -2224,7 +2388,7 @@
                 <birthLog>
                     <newUnitID>38</newUnitID>
                     <controller>1</controller>
-                    <parentID>1028</parentID>
+                    <parentID>36</parentID>
                 </birthLog>
             </birthLogList>
             <birthLogList>
@@ -2235,7 +2399,7 @@
                 <birthLog>
                     <newUnitID>39</newUnitID>
                     <controller>1</controller>
-                    <parentID>38</parentID>
+                    <parentID>1028</parentID>
                 </birthLog>
             </birthLogList>
             <birthLogList>
@@ -2256,6 +2420,17 @@
                 <roundNumber>23</roundNumber>
                 <birthLog>
                     <newUnitID>41</newUnitID>
+                    <controller>1</controller>
+                    <parentID>34</parentID>
+                </birthLog>
+            </birthLogList>
+            <birthLogList>
+                <roundNumber>24</roundNumber>
+            </birthLogList>
+            <birthLogList>
+                <roundNumber>25</roundNumber>
+                <birthLog>
+                    <newUnitID>42</newUnitID>
                     <controller>1</controller>
                     <parentID>1036</parentID>
                 </birthLog>
@@ -2283,7 +2458,7 @@
             <deathLogList>
                 <roundNumber>4</roundNumber>
                 <deathLog>
-                    <deadUnitID>1014</deadUnitID>
+                    <deadUnitID>1015</deadUnitID>
                     <controller>1</controller>
                 </deathLog>
             </deathLogList>
@@ -2293,7 +2468,7 @@
             <deathLogList>
                 <roundNumber>6</roundNumber>
                 <deathLog>
-                    <deadUnitID>1015</deadUnitID>
+                    <deadUnitID>1005</deadUnitID>
                     <controller>1</controller>
                 </deathLog>
             </deathLogList>
@@ -2313,7 +2488,7 @@
             <deathLogList>
                 <roundNumber>10</roundNumber>
                 <deathLog>
-                    <deadUnitID>1021</deadUnitID>
+                    <deadUnitID>1012</deadUnitID>
                     <controller>1</controller>
                 </deathLog>
             </deathLogList>
@@ -2333,7 +2508,7 @@
             <deathLogList>
                 <roundNumber>14</roundNumber>
                 <deathLog>
-                    <deadUnitID>1022</deadUnitID>
+                    <deadUnitID>1004</deadUnitID>
                     <controller>1</controller>
                 </deathLog>
             </deathLogList>
@@ -2343,7 +2518,7 @@
             <deathLogList>
                 <roundNumber>16</roundNumber>
                 <deathLog>
-                    <deadUnitID>1029</deadUnitID>
+                    <deadUnitID>1021</deadUnitID>
                     <controller>1</controller>
                 </deathLog>
             </deathLogList>
@@ -2353,7 +2528,7 @@
             <deathLogList>
                 <roundNumber>18</roundNumber>
                 <deathLog>
-                    <deadUnitID>1030</deadUnitID>
+                    <deadUnitID>1029</deadUnitID>
                     <controller>1</controller>
                 </deathLog>
             </deathLogList>
@@ -2363,7 +2538,7 @@
             <deathLogList>
                 <roundNumber>20</roundNumber>
                 <deathLog>
-                    <deadUnitID>1031</deadUnitID>
+                    <deadUnitID>1030</deadUnitID>
                     <controller>1</controller>
                 </deathLog>
             </deathLogList>
@@ -2373,7 +2548,7 @@
             <deathLogList>
                 <roundNumber>22</roundNumber>
                 <deathLog>
-                    <deadUnitID>1037</deadUnitID>
+                    <deadUnitID>1014</deadUnitID>
                     <controller>1</controller>
                 </deathLog>
             </deathLogList>
@@ -2383,11 +2558,21 @@
             <deathLogList>
                 <roundNumber>24</roundNumber>
                 <deathLog>
+                    <deadUnitID>1037</deadUnitID>
+                    <controller>1</controller>
+                </deathLog>
+            </deathLogList>
+            <deathLogList>
+                <roundNumber>25</roundNumber>
+            </deathLogList>
+            <deathLogList>
+                <roundNumber>26</roundNumber>
+                <deathLog>
                     <deadUnitID>5000</deadUnitID>
                     <controller>0</controller>
                 </deathLog>
                 <deathLog>
-                    <deadUnitID>1036</deadUnitID>
+                    <deadUnitID>1003</deadUnitID>
                     <controller>1</controller>
                 </deathLog>
             </deathLogList>
@@ -2422,7 +2607,7 @@
                 <damageLog>
                     <attackerID>5000</attackerID>
                     <attackerController>0</attackerController>
-                    <defenderID>1014</defenderID>
+                    <defenderID>1015</defenderID>
                     <defenderController>1</defenderController>
                     <damage>437</damage>
                 </damageLog>
@@ -2435,7 +2620,7 @@
                 <damageLog>
                     <attackerID>5000</attackerID>
                     <attackerController>0</attackerController>
-                    <defenderID>1015</defenderID>
+                    <defenderID>1005</defenderID>
                     <defenderController>1</defenderController>
                     <damage>289</damage>
                 </damageLog>
@@ -2461,7 +2646,7 @@
                 <damageLog>
                     <attackerID>5000</attackerID>
                     <attackerController>0</attackerController>
-                    <defenderID>1021</defenderID>
+                    <defenderID>1012</defenderID>
                     <defenderController>1</defenderController>
                     <damage>384</damage>
                 </damageLog>
@@ -2487,7 +2672,7 @@
                 <damageLog>
                     <attackerID>5000</attackerID>
                     <attackerController>0</attackerController>
-                    <defenderID>1022</defenderID>
+                    <defenderID>1004</defenderID>
                     <defenderController>1</defenderController>
                     <damage>243</damage>
                 </damageLog>
@@ -2500,7 +2685,7 @@
                 <damageLog>
                     <attackerID>5000</attackerID>
                     <attackerController>0</attackerController>
-                    <defenderID>1029</defenderID>
+                    <defenderID>1021</defenderID>
                     <defenderController>1</defenderController>
                     <damage>267</damage>
                 </damageLog>
@@ -2513,7 +2698,7 @@
                 <damageLog>
                     <attackerID>5000</attackerID>
                     <attackerController>0</attackerController>
-                    <defenderID>1030</defenderID>
+                    <defenderID>1029</defenderID>
                     <defenderController>1</defenderController>
                     <damage>433</damage>
                 </damageLog>
@@ -2526,7 +2711,7 @@
                 <damageLog>
                     <attackerID>5000</attackerID>
                     <attackerController>0</attackerController>
-                    <defenderID>1031</defenderID>
+                    <defenderID>1030</defenderID>
                     <defenderController>1</defenderController>
                     <damage>373</damage>
                 </damageLog>
@@ -2539,7 +2724,7 @@
                 <damageLog>
                     <attackerID>5000</attackerID>
                     <attackerController>0</attackerController>
-                    <defenderID>1037</defenderID>
+                    <defenderID>1014</defenderID>
                     <defenderController>1</defenderController>
                     <damage>227</damage>
                 </damageLog>
@@ -2552,16 +2737,29 @@
                 <damageLog>
                     <attackerID>5000</attackerID>
                     <attackerController>0</attackerController>
-                    <defenderID>1036</defenderID>
+                    <defenderID>1037</defenderID>
                     <defenderController>1</defenderController>
                     <damage>372</damage>
                 </damageLog>
+            </damageLogList>
+            <damageLogList>
+                <roundNumber>25</roundNumber>
+            </damageLogList>
+            <damageLogList>
+                <roundNumber>26</roundNumber>
                 <damageLog>
-                    <attackerID>41</attackerID>
+                    <attackerID>5000</attackerID>
+                    <attackerController>0</attackerController>
+                    <defenderID>1003</defenderID>
+                    <defenderController>1</defenderController>
+                    <damage>360</damage>
+                </damageLog>
+                <damageLog>
+                    <attackerID>42</attackerID>
                     <attackerController>1</attackerController>
                     <defenderID>5000</defenderID>
                     <defenderController>0</defenderController>
-                    <damage>1105</damage>
+                    <damage>1146</damage>
                 </damageLog>
             </damageLogList>
         </eventLogger>
@@ -2617,16 +2815,16 @@
                     <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                         <unitId>5000</unitId>
                         <actionType>PRIMITIVEATTACK</actionType>
-                        <targetId>1014</targetId>
+                        <targetId>1015</targetId>
                     </action>
                 </actionEntry>
             </actionList>
             <actionList>
                 <roundNumber>5</roundNumber>
                 <actionEntry>
-                    <unitID>1013</unitID>
+                    <unitID>1014</unitID>
                     <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                        <unitId>1013</unitId>
+                        <unitId>1014</unitId>
                         <actionType>PRIMITIVEBUILD</actionType>
                         <templateId>3000</templateId>
                     </action>
@@ -2639,16 +2837,16 @@
                     <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                         <unitId>5000</unitId>
                         <actionType>PRIMITIVEATTACK</actionType>
-                        <targetId>1015</targetId>
+                        <targetId>1005</targetId>
                     </action>
                 </actionEntry>
             </actionList>
             <actionList>
                 <roundNumber>7</roundNumber>
                 <actionEntry>
-                    <unitID>32</unitID>
+                    <unitID>1012</unitID>
                     <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                        <unitId>32</unitId>
+                        <unitId>1012</unitId>
                         <actionType>PRIMITIVEBUILD</actionType>
                         <templateId>3000</templateId>
                     </action>
@@ -2683,16 +2881,16 @@
                     <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                         <unitId>5000</unitId>
                         <actionType>PRIMITIVEATTACK</actionType>
-                        <targetId>1021</targetId>
+                        <targetId>1012</targetId>
                     </action>
                 </actionEntry>
             </actionList>
             <actionList>
                 <roundNumber>11</roundNumber>
                 <actionEntry>
-                    <unitID>1020</unitID>
+                    <unitID>1011</unitID>
                     <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                        <unitId>1020</unitId>
+                        <unitId>1011</unitId>
                         <actionType>PRIMITIVEBUILD</actionType>
                         <templateId>3000</templateId>
                     </action>
@@ -2727,18 +2925,18 @@
                     <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                         <unitId>5000</unitId>
                         <actionType>PRIMITIVEATTACK</actionType>
-                        <targetId>1022</targetId>
+                        <targetId>1004</targetId>
                     </action>
                 </actionEntry>
             </actionList>
             <actionList>
                 <roundNumber>15</roundNumber>
                 <actionEntry>
-                    <unitID>35</unitID>
+                    <unitID>1011</unitID>
                     <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                        <unitId>35</unitId>
+                        <unitId>1011</unitId>
                         <actionType>PRIMITIVEBUILD</actionType>
-                        <templateId>3000</templateId>
+                        <templateId>3001</templateId>
                     </action>
                 </actionEntry>
             </actionList>
@@ -2749,18 +2947,18 @@
                     <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                         <unitId>5000</unitId>
                         <actionType>PRIMITIVEATTACK</actionType>
-                        <targetId>1029</targetId>
+                        <targetId>1021</targetId>
                     </action>
                 </actionEntry>
             </actionList>
             <actionList>
                 <roundNumber>17</roundNumber>
                 <actionEntry>
-                    <unitID>1028</unitID>
+                    <unitID>36</unitID>
                     <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                        <unitId>1028</unitId>
+                        <unitId>36</unitId>
                         <actionType>PRIMITIVEBUILD</actionType>
-                        <templateId>3001</templateId>
+                        <templateId>3000</templateId>
                     </action>
                 </actionEntry>
             </actionList>
@@ -2771,16 +2969,16 @@
                     <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                         <unitId>5000</unitId>
                         <actionType>PRIMITIVEATTACK</actionType>
-                        <targetId>1030</targetId>
+                        <targetId>1029</targetId>
                     </action>
                 </actionEntry>
             </actionList>
             <actionList>
                 <roundNumber>19</roundNumber>
                 <actionEntry>
-                    <unitID>38</unitID>
+                    <unitID>1028</unitID>
                     <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                        <unitId>38</unitId>
+                        <unitId>1028</unitId>
                         <actionType>PRIMITIVEBUILD</actionType>
                         <templateId>3001</templateId>
                     </action>
@@ -2793,7 +2991,7 @@
                     <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                         <unitId>5000</unitId>
                         <actionType>PRIMITIVEATTACK</actionType>
-                        <targetId>1031</targetId>
+                        <targetId>1030</targetId>
                     </action>
                 </actionEntry>
             </actionList>
@@ -2804,7 +3002,7 @@
                     <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                         <unitId>39</unitId>
                         <actionType>PRIMITIVEBUILD</actionType>
-                        <templateId>3000</templateId>
+                        <templateId>3001</templateId>
                     </action>
                 </actionEntry>
             </actionList>
@@ -2815,18 +3013,18 @@
                     <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                         <unitId>5000</unitId>
                         <actionType>PRIMITIVEATTACK</actionType>
-                        <targetId>1037</targetId>
+                        <targetId>1014</targetId>
                     </action>
                 </actionEntry>
             </actionList>
             <actionList>
                 <roundNumber>23</roundNumber>
                 <actionEntry>
-                    <unitID>1036</unitID>
+                    <unitID>34</unitID>
                     <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                        <unitId>1036</unitId>
+                        <unitId>34</unitId>
                         <actionType>PRIMITIVEBUILD</actionType>
-                        <templateId>3002</templateId>
+                        <templateId>3000</templateId>
                     </action>
                 </actionEntry>
             </actionList>
@@ -2837,13 +3035,35 @@
                     <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                         <unitId>5000</unitId>
                         <actionType>PRIMITIVEATTACK</actionType>
-                        <targetId>1036</targetId>
+                        <targetId>1037</targetId>
+                    </action>
+                </actionEntry>
+            </actionList>
+            <actionList>
+                <roundNumber>25</roundNumber>
+                <actionEntry>
+                    <unitID>1036</unitID>
+                    <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                        <unitId>1036</unitId>
+                        <actionType>PRIMITIVEBUILD</actionType>
+                        <templateId>3002</templateId>
+                    </action>
+                </actionEntry>
+            </actionList>
+            <actionList>
+                <roundNumber>26</roundNumber>
+                <actionEntry>
+                    <unitID>5000</unitID>
+                    <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                        <unitId>5000</unitId>
+                        <actionType>PRIMITIVEATTACK</actionType>
+                        <targetId>1003</targetId>
                     </action>
                 </actionEntry>
                 <actionEntry>
-                    <unitID>41</unitID>
+                    <unitID>42</unitID>
                     <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                        <unitId>41</unitId>
+                        <unitId>42</unitId>
                         <actionType>PRIMITIVEATTACK</actionType>
                         <targetId>5000</targetId>
                     </action>
@@ -2915,7 +3135,7 @@
                         <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                             <unitId>5000</unitId>
                             <actionType>PRIMITIVEATTACK</actionType>
-                            <targetId>1014</targetId>
+                            <targetId>1015</targetId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
@@ -2924,10 +3144,10 @@
             <actionResultList>
                 <roundNumber>5</roundNumber>
                 <actionResultEntry>
-                    <unitID>1013</unitID>
+                    <unitID>1014</unitID>
                     <actionResult>
                         <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                            <unitId>1013</unitId>
+                            <unitId>1014</unitId>
                             <actionType>PRIMITIVEBUILD</actionType>
                             <templateId>3000</templateId>
                         </action>
@@ -2943,7 +3163,7 @@
                         <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                             <unitId>5000</unitId>
                             <actionType>PRIMITIVEATTACK</actionType>
-                            <targetId>1015</targetId>
+                            <targetId>1005</targetId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
@@ -2952,10 +3172,10 @@
             <actionResultList>
                 <roundNumber>7</roundNumber>
                 <actionResultEntry>
-                    <unitID>32</unitID>
+                    <unitID>1012</unitID>
                     <actionResult>
                         <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                            <unitId>32</unitId>
+                            <unitId>1012</unitId>
                             <actionType>PRIMITIVEBUILD</actionType>
                             <templateId>3000</templateId>
                         </action>
@@ -2999,7 +3219,7 @@
                         <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                             <unitId>5000</unitId>
                             <actionType>PRIMITIVEATTACK</actionType>
-                            <targetId>1021</targetId>
+                            <targetId>1012</targetId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
@@ -3008,10 +3228,10 @@
             <actionResultList>
                 <roundNumber>11</roundNumber>
                 <actionResultEntry>
-                    <unitID>1020</unitID>
+                    <unitID>1011</unitID>
                     <actionResult>
                         <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                            <unitId>1020</unitId>
+                            <unitId>1011</unitId>
                             <actionType>PRIMITIVEBUILD</actionType>
                             <templateId>3000</templateId>
                         </action>
@@ -3055,7 +3275,7 @@
                         <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                             <unitId>5000</unitId>
                             <actionType>PRIMITIVEATTACK</actionType>
-                            <targetId>1022</targetId>
+                            <targetId>1004</targetId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
@@ -3064,12 +3284,12 @@
             <actionResultList>
                 <roundNumber>15</roundNumber>
                 <actionResultEntry>
-                    <unitID>35</unitID>
+                    <unitID>1011</unitID>
                     <actionResult>
                         <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                            <unitId>35</unitId>
+                            <unitId>1011</unitId>
                             <actionType>PRIMITIVEBUILD</actionType>
-                            <templateId>3000</templateId>
+                            <templateId>3001</templateId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
@@ -3083,7 +3303,7 @@
                         <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                             <unitId>5000</unitId>
                             <actionType>PRIMITIVEATTACK</actionType>
-                            <targetId>1029</targetId>
+                            <targetId>1021</targetId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
@@ -3092,12 +3312,12 @@
             <actionResultList>
                 <roundNumber>17</roundNumber>
                 <actionResultEntry>
-                    <unitID>1028</unitID>
+                    <unitID>36</unitID>
                     <actionResult>
                         <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                            <unitId>1028</unitId>
+                            <unitId>36</unitId>
                             <actionType>PRIMITIVEBUILD</actionType>
-                            <templateId>3001</templateId>
+                            <templateId>3000</templateId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
@@ -3111,7 +3331,7 @@
                         <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                             <unitId>5000</unitId>
                             <actionType>PRIMITIVEATTACK</actionType>
-                            <targetId>1030</targetId>
+                            <targetId>1029</targetId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
@@ -3120,10 +3340,10 @@
             <actionResultList>
                 <roundNumber>19</roundNumber>
                 <actionResultEntry>
-                    <unitID>38</unitID>
+                    <unitID>1028</unitID>
                     <actionResult>
                         <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                            <unitId>38</unitId>
+                            <unitId>1028</unitId>
                             <actionType>PRIMITIVEBUILD</actionType>
                             <templateId>3001</templateId>
                         </action>
@@ -3139,7 +3359,7 @@
                         <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                             <unitId>5000</unitId>
                             <actionType>PRIMITIVEATTACK</actionType>
-                            <targetId>1031</targetId>
+                            <targetId>1030</targetId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
@@ -3153,7 +3373,7 @@
                         <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                             <unitId>39</unitId>
                             <actionType>PRIMITIVEBUILD</actionType>
-                            <templateId>3000</templateId>
+                            <templateId>3001</templateId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
@@ -3167,7 +3387,7 @@
                         <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                             <unitId>5000</unitId>
                             <actionType>PRIMITIVEATTACK</actionType>
-                            <targetId>1037</targetId>
+                            <targetId>1014</targetId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
@@ -3176,12 +3396,12 @@
             <actionResultList>
                 <roundNumber>23</roundNumber>
                 <actionResultEntry>
-                    <unitID>1036</unitID>
+                    <unitID>34</unitID>
                     <actionResult>
                         <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                            <unitId>1036</unitId>
+                            <unitId>34</unitId>
                             <actionType>PRIMITIVEBUILD</actionType>
-                            <templateId>3002</templateId>
+                            <templateId>3000</templateId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
@@ -3195,16 +3415,44 @@
                         <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                             <unitId>5000</unitId>
                             <actionType>PRIMITIVEATTACK</actionType>
-                            <targetId>1036</targetId>
+                            <targetId>1037</targetId>
+                        </action>
+                        <feedback>COMPLETED</feedback>
+                    </actionResult>
+                </actionResultEntry>
+            </actionResultList>
+            <actionResultList>
+                <roundNumber>25</roundNumber>
+                <actionResultEntry>
+                    <unitID>1036</unitID>
+                    <actionResult>
+                        <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                            <unitId>1036</unitId>
+                            <actionType>PRIMITIVEBUILD</actionType>
+                            <templateId>3002</templateId>
+                        </action>
+                        <feedback>COMPLETED</feedback>
+                    </actionResult>
+                </actionResultEntry>
+            </actionResultList>
+            <actionResultList>
+                <roundNumber>26</roundNumber>
+                <actionResultEntry>
+                    <unitID>5000</unitID>
+                    <actionResult>
+                        <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                            <unitId>5000</unitId>
+                            <actionType>PRIMITIVEATTACK</actionType>
+                            <targetId>1003</targetId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
                 </actionResultEntry>
                 <actionResultEntry>
-                    <unitID>41</unitID>
+                    <unitID>42</unitID>
                     <actionResult>
                         <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                            <unitId>41</unitId>
+                            <unitId>42</unitId>
                             <actionType>PRIMITIVEATTACK</actionType>
                             <targetId>5000</targetId>
                         </action>
@@ -3278,7 +3526,7 @@
                         <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                             <unitId>5000</unitId>
                             <actionType>PRIMITIVEATTACK</actionType>
-                            <targetId>1014</targetId>
+                            <targetId>1015</targetId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
@@ -3287,10 +3535,10 @@
             <actionResultList>
                 <roundNumber>5</roundNumber>
                 <actionResultEntry>
-                    <unitID>1013</unitID>
+                    <unitID>1014</unitID>
                     <actionResult>
                         <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                            <unitId>1013</unitId>
+                            <unitId>1014</unitId>
                             <actionType>PRIMITIVEBUILD</actionType>
                             <templateId>3000</templateId>
                         </action>
@@ -3306,7 +3554,7 @@
                         <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                             <unitId>5000</unitId>
                             <actionType>PRIMITIVEATTACK</actionType>
-                            <targetId>1015</targetId>
+                            <targetId>1005</targetId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
@@ -3315,10 +3563,10 @@
             <actionResultList>
                 <roundNumber>7</roundNumber>
                 <actionResultEntry>
-                    <unitID>32</unitID>
+                    <unitID>1012</unitID>
                     <actionResult>
                         <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                            <unitId>32</unitId>
+                            <unitId>1012</unitId>
                             <actionType>PRIMITIVEBUILD</actionType>
                             <templateId>3000</templateId>
                         </action>
@@ -3362,7 +3610,7 @@
                         <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                             <unitId>5000</unitId>
                             <actionType>PRIMITIVEATTACK</actionType>
-                            <targetId>1021</targetId>
+                            <targetId>1012</targetId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
@@ -3371,10 +3619,10 @@
             <actionResultList>
                 <roundNumber>11</roundNumber>
                 <actionResultEntry>
-                    <unitID>1020</unitID>
+                    <unitID>1011</unitID>
                     <actionResult>
                         <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                            <unitId>1020</unitId>
+                            <unitId>1011</unitId>
                             <actionType>PRIMITIVEBUILD</actionType>
                             <templateId>3000</templateId>
                         </action>
@@ -3418,7 +3666,7 @@
                         <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                             <unitId>5000</unitId>
                             <actionType>PRIMITIVEATTACK</actionType>
-                            <targetId>1022</targetId>
+                            <targetId>1004</targetId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
@@ -3427,12 +3675,12 @@
             <actionResultList>
                 <roundNumber>15</roundNumber>
                 <actionResultEntry>
-                    <unitID>35</unitID>
+                    <unitID>1011</unitID>
                     <actionResult>
                         <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                            <unitId>35</unitId>
+                            <unitId>1011</unitId>
                             <actionType>PRIMITIVEBUILD</actionType>
-                            <templateId>3000</templateId>
+                            <templateId>3001</templateId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
@@ -3446,7 +3694,7 @@
                         <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                             <unitId>5000</unitId>
                             <actionType>PRIMITIVEATTACK</actionType>
-                            <targetId>1029</targetId>
+                            <targetId>1021</targetId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
@@ -3455,12 +3703,12 @@
             <actionResultList>
                 <roundNumber>17</roundNumber>
                 <actionResultEntry>
-                    <unitID>1028</unitID>
+                    <unitID>36</unitID>
                     <actionResult>
                         <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                            <unitId>1028</unitId>
+                            <unitId>36</unitId>
                             <actionType>PRIMITIVEBUILD</actionType>
-                            <templateId>3001</templateId>
+                            <templateId>3000</templateId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
@@ -3474,7 +3722,7 @@
                         <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                             <unitId>5000</unitId>
                             <actionType>PRIMITIVEATTACK</actionType>
-                            <targetId>1030</targetId>
+                            <targetId>1029</targetId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
@@ -3483,10 +3731,10 @@
             <actionResultList>
                 <roundNumber>19</roundNumber>
                 <actionResultEntry>
-                    <unitID>38</unitID>
+                    <unitID>1028</unitID>
                     <actionResult>
                         <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                            <unitId>38</unitId>
+                            <unitId>1028</unitId>
                             <actionType>PRIMITIVEBUILD</actionType>
                             <templateId>3001</templateId>
                         </action>
@@ -3502,7 +3750,7 @@
                         <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                             <unitId>5000</unitId>
                             <actionType>PRIMITIVEATTACK</actionType>
-                            <targetId>1031</targetId>
+                            <targetId>1030</targetId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
@@ -3516,7 +3764,7 @@
                         <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                             <unitId>39</unitId>
                             <actionType>PRIMITIVEBUILD</actionType>
-                            <templateId>3000</templateId>
+                            <templateId>3001</templateId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
@@ -3530,7 +3778,7 @@
                         <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                             <unitId>5000</unitId>
                             <actionType>PRIMITIVEATTACK</actionType>
-                            <targetId>1037</targetId>
+                            <targetId>1014</targetId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
@@ -3539,12 +3787,12 @@
             <actionResultList>
                 <roundNumber>23</roundNumber>
                 <actionResultEntry>
-                    <unitID>1036</unitID>
+                    <unitID>34</unitID>
                     <actionResult>
                         <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                            <unitId>1036</unitId>
+                            <unitId>34</unitId>
                             <actionType>PRIMITIVEBUILD</actionType>
-                            <templateId>3002</templateId>
+                            <templateId>3000</templateId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
@@ -3558,16 +3806,44 @@
                         <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                             <unitId>5000</unitId>
                             <actionType>PRIMITIVEATTACK</actionType>
-                            <targetId>1036</targetId>
+                            <targetId>1037</targetId>
+                        </action>
+                        <feedback>COMPLETED</feedback>
+                    </actionResult>
+                </actionResultEntry>
+            </actionResultList>
+            <actionResultList>
+                <roundNumber>25</roundNumber>
+                <actionResultEntry>
+                    <unitID>1036</unitID>
+                    <actionResult>
+                        <action xsi:type="ProductionAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                            <unitId>1036</unitId>
+                            <actionType>PRIMITIVEBUILD</actionType>
+                            <templateId>3002</templateId>
+                        </action>
+                        <feedback>COMPLETED</feedback>
+                    </actionResult>
+                </actionResultEntry>
+            </actionResultList>
+            <actionResultList>
+                <roundNumber>26</roundNumber>
+                <actionResultEntry>
+                    <unitID>5000</unitID>
+                    <actionResult>
+                        <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                            <unitId>5000</unitId>
+                            <actionType>PRIMITIVEATTACK</actionType>
+                            <targetId>1003</targetId>
                         </action>
                         <feedback>COMPLETED</feedback>
                     </actionResult>
                 </actionResultEntry>
                 <actionResultEntry>
-                    <unitID>41</unitID>
+                    <unitID>42</unitID>
                     <actionResult>
                         <action xsi:type="TargetedAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                            <unitId>41</unitId>
+                            <unitId>42</unitId>
                             <actionType>PRIMITIVEATTACK</actionType>
                             <targetId>5000</targetId>
                         </action>
