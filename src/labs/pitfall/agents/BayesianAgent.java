@@ -80,6 +80,16 @@ public class BayesianAgent extends Agent {
       Coordinate toExplore = null;
 
       List<Coordinate> possiblePits = new ArrayList<Coordinate>();
+      List<Coordinate> breezes = new ArrayList<Coordinate>();
+
+      // counting breezes doesnt mean anything bc 4 can corrsepond to one pit
+      //   int breezeCount = 0;
+      //   for (Map.Entry<Coordinate, Boolean> entry : this.getKnownBreezeCoordinates()
+      //     .entrySet()) {
+      //     if (entry.getValue() == true) {
+      //       breezeCount += 1;
+      //     }
+      //   }
 
       if (this.getFrontierPitCoordinates().size() > 0) {
         List<Coordinate> frontier = new ArrayList<Coordinate>(
@@ -94,77 +104,80 @@ public class BayesianAgent extends Agent {
           for (Coordinate coord : frontier) {
             int x = coord.getXCoordinate();
             int y = coord.getYCoordinate();
-            if (
-              this.getKnownBreezeCoordinates()
-                .containsKey(new Coordinate(x - 1, y))
-            ) {
-              if (
-                this.getKnownBreezeCoordinates()
-                  .get(new Coordinate(x - 1, y)) ==
-                true
-              ) {
+            Coordinate left = new Coordinate(x - 1, y);
+            Coordinate right = new Coordinate(x + 1, y);
+            Coordinate up = new Coordinate(x, y - 1);
+            Coordinate down = new Coordinate(x, y + 1);
+            if (this.getKnownBreezeCoordinates().containsKey(left)) {
+              if (this.getKnownBreezeCoordinates().get(left) == true) {
                 validPits += 1;
                 if (!possiblePits.contains(coord)) possiblePits.add(coord);
+                if (!breezes.contains(left)) breezes.add(left);
               }
             }
-            if (
-              this.getKnownBreezeCoordinates()
-                .containsKey(new Coordinate(x + 1, y))
-            ) {
-              if (
-                this.getKnownBreezeCoordinates()
-                  .get(new Coordinate(x + 1, y)) ==
-                true
-              ) {
+            if (this.getKnownBreezeCoordinates().containsKey(right)) {
+              if (this.getKnownBreezeCoordinates().get(right) == true) {
                 validPits += 1;
                 if (!possiblePits.contains(coord)) possiblePits.add(coord);
+                if (!breezes.contains(right)) breezes.add(right);
               }
             }
-            if (
-              this.getKnownBreezeCoordinates()
-                .containsKey(new Coordinate(x, y - 1))
-            ) {
-              if (
-                this.getKnownBreezeCoordinates()
-                  .get(new Coordinate(x, y - 1)) ==
-                true
-              ) {
+            if (this.getKnownBreezeCoordinates().containsKey(down)) {
+              if (this.getKnownBreezeCoordinates().get(down) == true) {
                 validPits += 1;
                 if (!possiblePits.contains(coord)) possiblePits.add(coord);
+                if (!breezes.contains(down)) breezes.add(down);
               }
             }
-            if (
-              this.getKnownBreezeCoordinates()
-                .containsKey(new Coordinate(x, y + 1))
-            ) {
-              if (
-                this.getKnownBreezeCoordinates()
-                  .get(new Coordinate(x, y + 1)) ==
-                true
-              ) {
+            if (this.getKnownBreezeCoordinates().containsKey(up)) {
+              if (this.getKnownBreezeCoordinates().get(up) == true) {
                 validPits += 1;
                 if (!possiblePits.contains(coord)) possiblePits.add(coord);
+                if (!breezes.contains(up)) breezes.add(up);
               }
             }
           }
           System.out.println("validPits " + validPits);
           System.out.println("might be pits here " + possiblePits);
+          // every combo of the possible pits that are near breezes
+          List<List<Coordinate>> pitPowerSet = generatePowerSet(possiblePits);
+
+          // refine power set
+          List<List<Coordinate>> actuallyPossiblePits = new ArrayList<List<Coordinate>>();
+          if (pitPowerSet.size() > 0) {
+            for (List<Coordinate> subset : pitPowerSet) {
+              // make sure that each breeze has a potential pit corresponding to it
+              if (subset.size() > 0) {
+                if (breezes.size() <= subset.size() * 4) {
+                  actuallyPossiblePits.add(subset);
+                }
+              }
+
+              System.out.println(
+                "actually possible pits " + actuallyPossiblePits
+              );
+            }
+          }
+          Collections.shuffle(frontier);
+          toExplore = frontier.get(0);
         }
+
+        //   // calculate the probability of each pit combo
+        //   List<Double> pitProbs = new ArrayList<Double>();
+        //   for (List<Coordinate> pitCombo : pitPowerSet) {
+        //     double prob = 1.0;
+        //     for (Coordinate pit : pitCombo) {
+        //       prob *= this.getPitProb();
+        //     }
+        //     pitProbs.add(prob);
+        //   }
+
         // if there's a breeze thats surrounded on 3/4 sides by not breezes, then its a pit
 
-        Collections.shuffle(frontier);
-        toExplore = frontier.get(0);
+        System.out.println("breezes " + breezes);
+
+        return toExplore;
       }
-
-      // every combo of the possible pits that match breezes
-      List<List<Coordinate>> powerSet = generatePowerSet(possiblePits);
-      for (List<Coordinate> subset : powerSet) {
-        System.out.println(subset);
-      }
-
-      System.out.println("breezes " + this.getKnownBreezeCoordinates());
-
-      return toExplore;
     }
 
     // for finding every combo of pit placements use a power set
