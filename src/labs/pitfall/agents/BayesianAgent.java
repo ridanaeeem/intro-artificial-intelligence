@@ -12,7 +12,6 @@ import edu.cwru.sepia.environment.model.state.State.StateView;
 import edu.cwru.sepia.environment.model.state.Unit.UnitView;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.lang.Math;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -175,11 +174,9 @@ public class BayesianAgent extends Agent {
         // if there's a breeze thats surrounded on 3/4 sides by not breezes, then its a pit
 
         System.out.println("breezes " + breezes);
-
-        return toExplore;
       }
+      return toExplore;
     }
-
     // for finding every combo of pit placements use a power set
     public static List<List<Coordinate>> generatePowerSet(
       List<Coordinate> list
