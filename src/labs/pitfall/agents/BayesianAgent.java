@@ -72,11 +72,12 @@ public class BayesianAgent extends Agent {
      *          instead (and then pick the coordinate with the highest prob), its up to you!
      **/
     public Coordinate getNextCoordinateToExplore() {
-      System.out.println(
-        "frontier coordinates " + this.getFrontierPitCoordinates()
-      );
+      // System.out.println(
+      //   "frontier coordinates " + this.getFrontierPitCoordinates()
+      // );
 
       Coordinate toExplore = null;
+      double lowestProbVal = 100;
 
       List<Coordinate> possiblePits = new ArrayList<Coordinate>();
       List<Coordinate> breezes = new ArrayList<Coordinate>();
@@ -107,73 +108,166 @@ public class BayesianAgent extends Agent {
             Coordinate right = new Coordinate(x + 1, y);
             Coordinate up = new Coordinate(x, y - 1);
             Coordinate down = new Coordinate(x, y + 1);
+            
+            // assume they have pits
             if (this.getKnownBreezeCoordinates().containsKey(left)) {
               if (this.getKnownBreezeCoordinates().get(left) == true) {
                 validPits += 1;
                 if (!possiblePits.contains(coord)) possiblePits.add(coord);
                 if (!breezes.contains(left)) breezes.add(left);
-              }
+              } 
             }
             if (this.getKnownBreezeCoordinates().containsKey(right)) {
               if (this.getKnownBreezeCoordinates().get(right) == true) {
                 validPits += 1;
                 if (!possiblePits.contains(coord)) possiblePits.add(coord);
                 if (!breezes.contains(right)) breezes.add(right);
-              }
+              } 
             }
             if (this.getKnownBreezeCoordinates().containsKey(down)) {
               if (this.getKnownBreezeCoordinates().get(down) == true) {
                 validPits += 1;
                 if (!possiblePits.contains(coord)) possiblePits.add(coord);
                 if (!breezes.contains(down)) breezes.add(down);
-              }
+              } 
             }
             if (this.getKnownBreezeCoordinates().containsKey(up)) {
               if (this.getKnownBreezeCoordinates().get(up) == true) {
                 validPits += 1;
                 if (!possiblePits.contains(coord)) possiblePits.add(coord);
                 if (!breezes.contains(up)) breezes.add(up);
+              } 
+            }
+            
+            // if they are surrounded by a single breeze=false, they do not have a pit
+            if (this.getKnownBreezeCoordinates().containsKey(left)){
+              if (this.getKnownBreezeCoordinates().get(left) == false) {
+                if (possiblePits.contains(coord)) possiblePits.remove(coord);
+              }
+            }
+            if (this.getKnownBreezeCoordinates().containsKey(right)){
+              if (this.getKnownBreezeCoordinates().get(right) == false) {
+                if (possiblePits.contains(coord)) possiblePits.remove(coord);
+              }
+            }
+            if (this.getKnownBreezeCoordinates().containsKey(down)){
+              if (this.getKnownBreezeCoordinates().get(down) == false) {
+                if (possiblePits.contains(coord)) possiblePits.remove(coord);
+              }
+            }
+            if (this.getKnownBreezeCoordinates().containsKey(up)){
+              if (this.getKnownBreezeCoordinates().get(up) == false) {
+                if (possiblePits.contains(coord)) possiblePits.remove(coord);
               }
             }
           }
-          System.out.println("validPits " + validPits);
-          System.out.println("might be pits here " + possiblePits);
+
+          // we now have a list of potential pits that makes sense with breeze info
+          // System.out.println("validPits " + validPits);
+          // System.out.println("might be pits here " + possiblePits);
           // every combo of the possible pits that are near breezes
           List<List<Coordinate>> pitPowerSet = generatePowerSet(possiblePits);
 
           // refine power set
           List<List<Coordinate>> actuallyPossiblePits = new ArrayList<List<Coordinate>>();
+          for (List<Coordinate> subset : pitPowerSet) {
+            if (subset.size() > 0) actuallyPossiblePits.add(subset);
+          }
           if (pitPowerSet.size() > 0) {
             for (List<Coordinate> subset : pitPowerSet) {
-              // make sure that each breeze has a potential pit corresponding to it
+              // make sure that each breeze has a potential pit corresponding to it 
+              int pitCount = 0;
               if (subset.size() > 0) {
-                if (breezes.size() <= subset.size() * 4) {
-                  actuallyPossiblePits.add(subset);
+                for (Coordinate breeze : breezes) {
+                  int x = breeze.getXCoordinate();
+                  int y = breeze.getYCoordinate();
+                  Coordinate left = new Coordinate(x - 1, y);
+                  Coordinate right = new Coordinate(x + 1, y);
+                  Coordinate up = new Coordinate(x, y - 1);
+                  Coordinate down = new Coordinate(x, y + 1);
+                  if (subset.contains(left) || subset.contains(right) || subset.contains(up) || subset.contains(down)){ 
+                    continue;
+                  } else {
+                    if (actuallyPossiblePits.contains(subset)){
+                      actuallyPossiblePits.remove(subset);
+                    }
+                  }
                 }
               }
-
-              System.out.println(
-                "actually possible pits " + actuallyPossiblePits
-              );
             }
           }
-          Collections.shuffle(frontier);
-          toExplore = frontier.get(0);
-        }
 
-        //   // calculate the probability of each pit combo
-        //   List<Double> pitProbs = new ArrayList<Double>();
-        //   for (List<Coordinate> pitCombo : pitPowerSet) {
-        //     double prob = 1.0;
-        //     for (Coordinate pit : pitCombo) {
-        //       prob *= this.getPitProb();
-        //     }
-        //     pitProbs.add(prob);
-        //   }
+          // calculate the probability of each pit combo
+          // List<Double> pitProbs = new ArrayList<Double>();
+          // probabilities for every square summed up
+          double totalProb = 0;
+          // query each square in the frontier
+          for (Coordinate frontierCoord : frontier){
+            double squareProb = 0;
+            if (possiblePits.contains(frontierCoord)){
+              // default probability for a square
+              squareProb = pitProb;
+              // for every combo of pits
+              for (List<Coordinate> pitCombo : actuallyPossiblePits){
+                // if the query square is in the pit combo
+                if (pitCombo.contains(frontierCoord)){
+                  // find probability of that combo even happening
+                  double comboProb = 1;
+                  for (Coordinate coord : this.getKnownBreezeCoordinates().keySet()){
+                    // probability of a pit being at a coord
+                    if (pitCombo.contains(coord)){
+                      comboProb *= pitProb;
+                    } 
+                    // probability of a pit not being at a coord
+                    else {
+                      comboProb *= (1 - pitProb);
+                    }
+                  }
+                  // add the probability of that combo to the probability of that square
+                  squareProb += comboProb;
+                } 
+              }
+            } 
+            
+            totalProb += squareProb;
+            if (squareProb < lowestProbVal){
+              lowestProbVal = squareProb;
+              toExplore = frontierCoord;
+              // System.out.println("we should explore " + toExplore + " with prob " + lowestProbVal);
+            } else if (squareProb == lowestProbVal){
+              if (new Random().nextBoolean()){
+                lowestProbVal = squareProb;
+                toExplore = frontierCoord;
+              }
+            }
+            // pitProbs.add(squareProb);
+          }
+          // for (int i = 0; i < pitProbs.size(); i++){
+          //   pitProbs.set(i, pitProbs.get(i) / totalProb);
+          // }
+          // System.out.println("totalProb " + totalProb);
+          // System.out.println("pitProbs " + pitProbs);
+
+          // for (List<Coordinate> pitCombo : pitPowerSet) {
+          //   double prob = pitProb;
+          //   // probability for each pit in the combo
+          //   for (Coordinate pit : pitCombo) {
+          //     prob *= pitProb;
+          //   }
+          //   for (Coordinate frontierSquare : frontier) {
+          //     if (!pitCombo.contains(frontierSquare)) {
+          //       prob *= (1 - pitProb);
+          //     }
+          //   }
+            // pitProbs.add(prob);
+          // }
+
+          // System.out.println("pitProbs " + pitProbs);
+        };
 
         // if there's a breeze thats surrounded on 3/4 sides by not breezes, then its a pit
 
-        System.out.println("breezes " + breezes);
+        // System.out.println("breezes " + breezes);
       }
       return toExplore;
     }
