@@ -210,10 +210,14 @@ public class ProbabilisticAgent
                 System.out.println("EXPANDING UPWARDS");
                 while (attackedCoordinates.contains(top)){
                     top = new Coordinate(top.getXCoordinate(), top.getYCoordinate() - 1);
+                    if (missedCoordinates.contains(top)){
+                        prTop = 0;
+                        break;
+                    } else {
+                        x = top.getXCoordinate();
+                        y = top.getYCoordinate();
+                    }
                 }
-                x = top.getXCoordinate();
-                y = top.getYCoordinate();
-
                 // but if that was a miss or out of bounds, switch directions and go down
                 // see if the current x and y have already been checked to be missed
                 if (missedCoordinates.contains(new Coordinate(x, y)) || y < 0 || missedCoordinates.contains(new Coordinate(prevX, prevY))) {
