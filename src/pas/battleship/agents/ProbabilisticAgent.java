@@ -182,19 +182,19 @@ public class ProbabilisticAgent
             Coordinate highestProbCoord;
             
             
-            if (top.getYCoordinate() < 0 || top.getYCoordinate() > boardHeight) {
+            if (top.getYCoordinate() < 0 || top.getYCoordinate() > boardHeight || attackedCoordinates.contains(top)) {
                 prTop = 0;
                 options--;
             }
-            if (bottom.getYCoordinate() < 0 || bottom.getYCoordinate() > boardHeight) {
+            if (bottom.getYCoordinate() < 0 || bottom.getYCoordinate() > boardHeight || attackedCoordinates.contains(bottom)) {
                 prBottom = 0;
                 options--;
             }
-            if (left.getXCoordinate() < 0 || left.getXCoordinate() > boardWidth) {
+            if (left.getXCoordinate() < 0 || left.getXCoordinate() > boardWidth || attackedCoordinates.contains(left)) {
                 prLeft = 0;
                 options--;
             }
-            if (right.getXCoordinate() < 0 || right.getXCoordinate() > boardWidth) {
+            if (right.getXCoordinate() < 0 || right.getXCoordinate() > boardWidth || attackedCoordinates.contains(right)) {
                 prRight = 0;
                 options--;
             }
@@ -203,7 +203,6 @@ public class ProbabilisticAgent
             prBottom = prBottom / options;
             prLeft = prLeft / options;
             prRight = prRight / options;
-
             
             // if we have already attacked in any of these directions, keep expanding in that direction
             if (hitCoordinates.contains(bottom) || hitCoordinates.contains(top) || hitCoordinates.contains(left) || hitCoordinates.contains(right)) {
@@ -217,7 +216,7 @@ public class ProbabilisticAgent
 
                 // but if that was a miss or out of bounds, switch directions and go down
                 // see if the current x and y have already been checked to be missed
-                if (missedCoordinates.contains(new Coordinate(x, y)) || y < 0) {
+                if (missedCoordinates.contains(new Coordinate(x, y)) || y < 0 || missedCoordinates.contains(new Coordinate(prevX, prevY))) {
                     System.out.println("GOING DOWNWARDS");
                     while (attackedCoordinates.contains(bottom)){
                         bottom = new Coordinate(bottom.getXCoordinate(), bottom.getYCoordinate() + 1);
@@ -277,7 +276,7 @@ public class ProbabilisticAgent
         //     enemyBoard[attackedCoord.getXCoordinate()][attackedCoord.getYCoordinate()]);
         // }
         }        
-        if (x > boardWidth || y > boardHeight || x < 0 || y < 0) {
+        if (x == boardWidth || y == boardHeight || x < 0 || y < 0) {
             // ensure diagonality first
             if (x % 2 == 0) {
                 while (y % 2 != 0) {
