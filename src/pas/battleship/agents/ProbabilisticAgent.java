@@ -32,7 +32,7 @@ public class ProbabilisticAgent
     public final ArrayList<Coordinate> hitCoordinates = new ArrayList<Coordinate>();
     public final ArrayList<Coordinate> missedCoordinates = new ArrayList<Coordinate>();
 
-    boolean hitSearch = false;
+    boolean hitSearch;
     Coordinate lastHit;
 
     @Override
@@ -94,17 +94,22 @@ public class ProbabilisticAgent
             lastHit = new Coordinate(prevX, prevY);
             System.out.println("last hit: " + lastHit);
             hitCoordinates.add(lastHit);
-            hitSearch = true;
         } else if (enemyBoard[prevX][prevY] == miss) {
             missedCoordinates.add(new Coordinate(prevX, prevY));
+            System.out.println("most recent miss: " + prevX + " " + prevY);
         }
+
+        System.out.println("hit coords: " + hitCoordinates);
+        if (hitCoordinates.size() > 0) hitSearch = true;
+        System.out.println("hit search: " + hitSearch);
+
         // pick any x
         int x = random.nextInt(boardWidth);
         // follow a checkerboard pattern
         int y = random.nextInt(boardHeight);
 
         // if no leads, attack randomly diagonally 
-        if ((attackedCoordinates.size() == 0) || (enemyBoard[prevX][prevY] == miss)){
+        if (!hitSearch) {
             // ensure diagonality first
             if (x % 2 == 0) {
                 while (y % 2 != 0) {
@@ -155,18 +160,19 @@ public class ProbabilisticAgent
             }
             attackedCoordinates.add(new Coordinate(x, y));
         } 
-        // if we just hit something and want more hits
+        // if we just hit something we need to sink that something
         else if (hitSearch || enemyBoard[prevX][prevY] == hit){
             System.out.println("LOOKING FOR A HIT");
-            // look cardinally around hit
+            // look cardinally around the last hit
             Coordinate top = new Coordinate(lastHit.getXCoordinate(), lastHit.getYCoordinate() - 1);
             Coordinate bottom = new Coordinate(lastHit.getXCoordinate(), lastHit.getYCoordinate() + 1);
             Coordinate left = new Coordinate(lastHit.getXCoordinate() - 1, lastHit.getYCoordinate());
             Coordinate right = new Coordinate(lastHit.getXCoordinate() + 1, lastHit.getYCoordinate());
             System.out.println("top: " + top + " bottom: " + bottom + " left: " + left + " right: " + right);
-
+            
+            // if we have already attacked in any of these directions, keep expanding in that direction
             if (hitCoordinates.contains(bottom) || hitCoordinates.contains(top) || hitCoordinates.contains(left) || hitCoordinates.contains(right)) {
-               // if we have already attacked above go beyond that
+                // if we have already attacked upwards keep expanding upwards
                 System.out.println("EXPANDING UPWARDS");
                 while (attackedCoordinates.contains(top)){
                     top = new Coordinate(top.getXCoordinate(), top.getYCoordinate() - 1);
@@ -174,35 +180,35 @@ public class ProbabilisticAgent
                 x = top.getXCoordinate();
                 y = top.getYCoordinate();
 
-                // // but if that was a miss, switch directions and go down
-                // if (missedCoordinates.contains(top) || top.getYCoordinate() < 0) {
-                //     System.out.println("GOING DOWNWARDS");
-                //     while (attackedCoordinates.contains(bottom)){
-                //         bottom = new Coordinate(bottom.getXCoordinate(), bottom.getYCoordinate() + 1);
-                //     }
-                //     x = bottom.getXCoordinate();
-                //     y = bottom.getYCoordinate();
+                // but if that was a miss or out of bounds, switch directions and go down
+                if (missedCoordinates.contains(new Coordinate(x, y)) || y < 0) {
+                    System.out.println("GOING DOWNWARDS");
+                    while (attackedCoordinates.contains(bottom)){
+                        bottom = new Coordinate(bottom.getXCoordinate(), bottom.getYCoordinate() + 1);
+                    }
+                    x = bottom.getXCoordinate();
+                    y = bottom.getYCoordinate();
 
-                //     // but if we can't go down either, this is two ships stacked on top of each other, let's start by going left
-                //     if (missedCoordinates.contains(left) || bottom.getYCoordinate() > boardHeight) {
-                //         System.out.println("GOING LEFT");
-                //         while (attackedCoordinates.contains(left)){
-                //             left = new Coordinate(left.getXCoordinate() - 1, left.getYCoordinate());
-                //         }
-                //         x = left.getXCoordinate();
-                //         y = left.getYCoordinate();
+                    // but if we can't go down either, this is two ships stacked on top of each other, let's start by going left
+                    // if (missedCoordinates.contains(left) || bottom.getYCoordinate() > boardHeight) {
+                    //     System.out.println("GOING LEFT");
+                    //     while (attackedCoordinates.contains(left)){
+                    //         left = new Coordinate(left.getXCoordinate() - 1, left.getYCoordinate());
+                    //     }
+                    //     x = left.getXCoordinate();
+                    //     y = left.getYCoordinate();
 
-                //         // if we can't go left then this ship is on the right
-                //         if (missedCoordinates.contains(right) || left.getXCoordinate() < 0) {
-                //             System.out.println("GOING RIGHT");
-                //             while (attackedCoordinates.contains(right)){
-                //                 right = new Coordinate(right.getXCoordinate() + 1, right.getYCoordinate());
-                //             }
-                //             x = right.getXCoordinate();
-                //             y = right.getYCoordinate();
-                //         }
-                //     }
-                // } 
+                    //     // if we can't go left then this ship is on the right
+                    //     if (missedCoordinates.contains(right) || left.getXCoordinate() < 0) {
+                    //         System.out.println("GOING RIGHT");
+                    //         while (attackedCoordinates.contains(right)){
+                    //             right = new Coordinate(right.getXCoordinate() + 1, right.getYCoordinate());
+                    //         }
+                    //         x = right.getXCoordinate();
+                    //         y = right.getYCoordinate();
+                    //     }
+                    // }
+                } 
             } 
             // 0,0 is top left btw
             // expanding upwards
