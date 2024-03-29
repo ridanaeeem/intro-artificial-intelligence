@@ -161,7 +161,7 @@ public class ProbabilisticAgent
             attackedCoordinates.add(new Coordinate(x, y));
         } 
         // if we just hit something we need to sink that something
-        else if (hitSearch || enemyBoard[prevX][prevY] == hit){
+        else if (hitSearch){
             System.out.println("LOOKING FOR A HIT");
             // look cardinally around the last hit
             Coordinate top = new Coordinate(lastHit.getXCoordinate(), lastHit.getYCoordinate() - 1);
@@ -170,6 +170,33 @@ public class ProbabilisticAgent
             Coordinate right = new Coordinate(lastHit.getXCoordinate() + 1, lastHit.getYCoordinate());
             System.out.println("top: " + top + " bottom: " + bottom + " left: " + left + " right: " + right);
             
+            // probabilities - expand in direction with highest 
+            double prTop;
+            double prBottom;
+            double prLeft;
+            double prRight;
+            int options = 4;
+            
+            if (top.getYCoordinate() < 0 || top.getYCoordinate() > boardHeight) {
+                prTop = 0;
+                options--;
+            }
+            if (bottom.getYCoordinate() < 0 || bottom.getYCoordinate() > boardHeight) {
+                prBottom = 0;
+                options--;
+            }
+            if (left.getXCoordinate() < 0 || left.getXCoordinate() > boardWidth) {
+                prLeft = 0;
+                options--;
+            }
+            if (right.getXCoordinate() < 0 || right.getXCoordinate() > boardWidth) {
+                prRight = 0;
+                options--;
+            }
+
+
+            
+
             // if we have already attacked in any of these directions, keep expanding in that direction
             if (hitCoordinates.contains(bottom) || hitCoordinates.contains(top) || hitCoordinates.contains(left) || hitCoordinates.contains(right)) {
                 // if we have already attacked upwards keep expanding upwards
@@ -181,6 +208,7 @@ public class ProbabilisticAgent
                 y = top.getYCoordinate();
 
                 // but if that was a miss or out of bounds, switch directions and go down
+                // see if the current x and y have already been checked to be missed
                 if (missedCoordinates.contains(new Coordinate(x, y)) || y < 0) {
                     System.out.println("GOING DOWNWARDS");
                     while (attackedCoordinates.contains(bottom)){
@@ -189,46 +217,28 @@ public class ProbabilisticAgent
                     x = bottom.getXCoordinate();
                     y = bottom.getYCoordinate();
 
-                    // but if we can't go down either, this is two ships stacked on top of each other, let's start by going left
-                    // if (missedCoordinates.contains(left) || bottom.getYCoordinate() > boardHeight) {
-                    //     System.out.println("GOING LEFT");
-                    //     while (attackedCoordinates.contains(left)){
-                    //         left = new Coordinate(left.getXCoordinate() - 1, left.getYCoordinate());
-                    //     }
-                    //     x = left.getXCoordinate();
-                    //     y = left.getYCoordinate();
+                    // but if we can't go down to sink, this is two ships stacked on top of each other, let's start by going left
+                    if (missedCoordinates.contains(new Coordinate(prevX, prevY)) || y > boardHeight) {
+                        System.out.println("GOING LEFT");
+                        while (attackedCoordinates.contains(left)){
+                            left = new Coordinate(left.getXCoordinate() - 1, left.getYCoordinate());
+                        }
+                        x = left.getXCoordinate();
+                        y = left.getYCoordinate();
 
-                    //     // if we can't go left then this ship is on the right
-                    //     if (missedCoordinates.contains(right) || left.getXCoordinate() < 0) {
-                    //         System.out.println("GOING RIGHT");
-                    //         while (attackedCoordinates.contains(right)){
-                    //             right = new Coordinate(right.getXCoordinate() + 1, right.getYCoordinate());
-                    //         }
-                    //         x = right.getXCoordinate();
-                    //         y = right.getYCoordinate();
-                    //     }
-                    // }
+                        // if we can't go left then this ship is on the right
+                        if (missedCoordinates.contains(new Coordinate(x, y)) || x < 0) {
+                            System.out.println("GOING RIGHT");
+                            while (attackedCoordinates.contains(right)){
+                                right = new Coordinate(right.getXCoordinate() + 1, right.getYCoordinate());
+                            }
+                            x = right.getXCoordinate();
+                            y = right.getYCoordinate();
+                        }
+                    }
                 } 
             } 
-            // 0,0 is top left btw
-            // expanding upwards
-            // else if (hitCoordinates.contains(bottom)){
-            //     System.out.println("NOTHING DONE YET");
-            //     // pick random for now, later take into acc ship sizes
-            //     if (!attackedCoordinates.contains(top)) {
-            //         x = top.getXCoordinate();
-            //         y = top.getYCoordinate(); 
-            //     } else if (!attackedCoordinates.contains(bottom)) {
-            //         x = bottom.getXCoordinate();
-            //         y = bottom.getYCoordinate();
-            //     } else if (!attackedCoordinates.contains(left)) {
-            //         x = left.getXCoordinate();
-            //         y = left.getYCoordinate();
-            //     } else if (!attackedCoordinates.contains(right)) {
-            //         x = right.getXCoordinate();
-            //         y = right.getYCoordinate();
-            //     }
-            // } 
+            // if we haven't attacked in any of these directions, pick one
             else {
                 System.out.println("NOTHING DONE YET");
                 // pick random for now, later take into acc ship sizes
