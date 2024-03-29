@@ -13,7 +13,6 @@ import edu.bu.battleship.utils.Coordinate;
 
 // my project imports
 import java.util.*;
-import java.util.Random;
 import edu.bu.battleship.game.Constants.Ship;
 import edu.bu.battleship.game.ships.Ship.ShipType;
 import edu.bu.battleship.game.PlayerView;
@@ -30,6 +29,8 @@ public class ProbabilisticAgent
     }
 
     public final ArrayList<Coordinate> attackedCoordinates = new ArrayList<Coordinate>();
+    public final ArrayList<Coordinate> hitCoordinates = new ArrayList<Coordinate>();
+    public final ArrayList<Coordinate> doNotHitCoordinates = new ArrayList<Coordinate>();
 
     @Override
     public Coordinate makeMove(final GameView game)
@@ -69,38 +70,111 @@ public class ProbabilisticAgent
         // Map<ShipType, java.lang.Integer> enemyShips = PlayerView.getEnemyShipTypeToNumRemaining();
         // ship types
         ArrayList<ShipType> shipTypes = new ArrayList<>();
-        // ship sizes
-        ArrayList<Integer> shipSizes = new ArrayList<>();
-        for (Map.Entry<ShipType, Integer> ship : myShips.entrySet()) {
-            // ship types
-            shipTypes.add(ship.getKey());
-            // ship sizes
-            shipSizes.add(Ship.getShipSize(ship.getKey()));
-        }
-        // total number of ships
-        int shipCount = shipTypes.size();
-        
-        // java.util.Set<Coordinate> allCoords = game.getCoordinates();
-        
 
-        Random random = new Random();
-        int x = random.nextInt(boardWidth);
-        int y = random.nextInt(boardHeight);
-        while (attackedCoordinates.contains(new Coordinate(x, y))) {
-            x = random.nextInt(boardWidth);
-            y = random.nextInt(boardHeight);
+        int prevX = 0;
+        int prevY = 0;
+        if (attackedCoordinates.size() != 0) {
+            prevX = attackedCoordinates.get(attackedCoordinates.size() - 1).getXCoordinate();
+            prevY = attackedCoordinates.get(attackedCoordinates.size() - 1).getYCoordinate();
         }
-        attackedCoordinates.add(new Coordinate(x, y));
+        System.out.println(enemyBoard[prevX][prevY] + " " + prevX + " " + prevY);
+        Random random = new Random();
+        EnemyBoard.Outcome hit = EnemyBoard.Outcome.HIT;
+        EnemyBoard.Outcome sunk = EnemyBoard.Outcome.SUNK;
+        EnemyBoard.Outcome miss = EnemyBoard.Outcome.MISS;
+
+        // pick any x
+        int x = random.nextInt(boardWidth);
+        // follow a checkerboard pattern
+        int y = random.nextInt(boardHeight);
+
+        // if no leads, attack randomly diagonally 
+        if ((hitCoordinates.size() == 0) || (enemyBoard[prevX][prevY] == miss)){
+            // ensure diagonality first
+            if (x % 2 == 0) {
+                while (y % 2 != 0) {
+                    y = random.nextInt(boardHeight);
+                }
+            } else {
+                while (y % 2 == 0) {
+                    y = random.nextInt(boardHeight);
+                }
+            }
+            // then check and see if it would be a waste to attack a set of coordinates
+            while (attackedCoordinates.contains(new Coordinate(x, y))) {
+                x = random.nextInt(boardWidth);
+                if (x % 2 == 0) {
+                    while (y % 2 != 0) {
+                        y = random.nextInt(boardHeight);
+                    }
+                } else {
+                    while (y % 2 == 0) {
+                        y = random.nextInt(boardHeight);
+                    }
+                }
+            }
+            attackedCoordinates.add(new Coordinate(x, y));    
+        }
+        else if (enemyBoard[prevX][prevY] == hit){
+            System.out.println("WE GOT A HIT");
+            if (x % 2 == 0) {
+                while (y % 2 != 0) {
+                    y = random.nextInt(boardHeight);
+                }
+            } else {
+                while (y % 2 == 0) {
+                    y = random.nextInt(boardHeight);
+                }
+            }
+            while (attackedCoordinates.contains(new Coordinate(x, y))) {
+               if (x % 2 == 0) {
+                while (y % 2 != 0) {
+                    y = random.nextInt(boardHeight);
+                }
+            } else {
+                while (y % 2 == 0) {
+                    y = random.nextInt(boardHeight);
+                }
+            }
+            }
+            attackedCoordinates.add(new Coordinate(x, y));
+        } else if (enemyBoard[prevX][prevY] == sunk){
+            System.out.println("WE GOT A SINK");
+            // pick any x
+            if (x % 2 == 0) {
+                while (y % 2 != 0) {
+                    y = random.nextInt(boardHeight);
+                }
+            } else {
+                while (y % 2 == 0) {
+                    y = random.nextInt(boardHeight);
+                }
+            }
+            while (attackedCoordinates.contains(new Coordinate(x, y))) {
+                if (x % 2 == 0) {
+                while (y % 2 != 0) {
+                    y = random.nextInt(boardHeight);
+                }
+            } else {
+                while (y % 2 == 0) {
+                    y = random.nextInt(boardHeight);
+                }
+            }
+            }
+            attackedCoordinates.add(new Coordinate(x, y));
+        // if no hits yet, keep firing randomly 
+        } 
+        
         // System.out.println("outcomes:" + enemyBoard[x][y]); 
 
         // while (shipCount >= 1){
         //     return new Coordinate(2, 2); 
         // }
         
-        for (Coordinate attackedCoord : attackedCoordinates) {
-            System.out.println("here's the stuff " + attackedCoord + " " +
-            enemyBoard[attackedCoord.getXCoordinate()][attackedCoord.getYCoordinate()]);
-        }
+        // for (Coordinate attackedCoord : attackedCoordinates) {
+        //     System.out.println("here's the stuff " + attackedCoord + " " +
+        //     enemyBoard[attackedCoord.getXCoordinate()][attackedCoord.getYCoordinate()]);
+        // }
 
         return new Coordinate(x, y); 
     }
