@@ -171,11 +171,16 @@ public class ProbabilisticAgent
             System.out.println("top: " + top + " bottom: " + bottom + " left: " + left + " right: " + right);
             
             // probabilities - expand in direction with highest 
-            double prTop;
-            double prBottom;
-            double prLeft;
-            double prRight;
             int options = 4;
+            double prTop = 1;
+            double prBottom = 1;
+            double prLeft = 1;
+            double prRight = 1;
+            
+            double defaultProb = 1/options;
+            double highestProbValue;
+            Coordinate highestProbCoord;
+            
             
             if (top.getYCoordinate() < 0 || top.getYCoordinate() > boardHeight) {
                 prTop = 0;
@@ -194,9 +199,12 @@ public class ProbabilisticAgent
                 options--;
             }
 
+            prTop = prTop / options;
+            prBottom = prBottom / options;
+            prLeft = prLeft / options;
+            prRight = prRight / options;
 
             
-
             // if we have already attacked in any of these directions, keep expanding in that direction
             if (hitCoordinates.contains(bottom) || hitCoordinates.contains(top) || hitCoordinates.contains(left) || hitCoordinates.contains(right)) {
                 // if we have already attacked upwards keep expanding upwards
@@ -227,7 +235,7 @@ public class ProbabilisticAgent
                         y = left.getYCoordinate();
 
                         // if we can't go left then this ship is on the right
-                        if (missedCoordinates.contains(new Coordinate(x, y)) || x < 0) {
+                        if (missedCoordinates.contains(new Coordinate(prevX, prevY)) || x < 0) {
                             System.out.println("GOING RIGHT");
                             while (attackedCoordinates.contains(right)){
                                 right = new Coordinate(right.getXCoordinate() + 1, right.getYCoordinate());
@@ -238,7 +246,8 @@ public class ProbabilisticAgent
                     }
                 } 
             } 
-            // if we haven't attacked in any of these directions, pick one
+
+            // if we haven't attacked in any of the directions cardinal to hit, just pick one
             else {
                 System.out.println("NOTHING DONE YET");
                 // pick random for now, later take into acc ship sizes
@@ -257,6 +266,17 @@ public class ProbabilisticAgent
                 }
             }
 
+        // System.out.println("outcomes:" + enemyBoard[x][y]); 
+
+        // while (shipCount >= 1){
+        //     return new Coordinate(2, 2); 
+        // }
+        
+        // for (Coordinate attackedCoord : attackedCoordinates) {
+        //     System.out.println("here's the stuff " + attackedCoord + " " +
+        //     enemyBoard[attackedCoord.getXCoordinate()][attackedCoord.getYCoordinate()]);
+        // }
+        }        
         if (x > boardWidth || y > boardHeight || x < 0 || y < 0) {
             // ensure diagonality first
             if (x % 2 == 0) {
@@ -282,17 +302,6 @@ public class ProbabilisticAgent
                 }
             }
         }
-        // System.out.println("outcomes:" + enemyBoard[x][y]); 
-
-        // while (shipCount >= 1){
-        //     return new Coordinate(2, 2); 
-        // }
-        
-        // for (Coordinate attackedCoord : attackedCoordinates) {
-        //     System.out.println("here's the stuff " + attackedCoord + " " +
-        //     enemyBoard[attackedCoord.getXCoordinate()][attackedCoord.getYCoordinate()]);
-        // }
-        }        
         System.out.println(" ");
         attackedCoordinates.add(new Coordinate(x, y));
         return new Coordinate(x, y); 
