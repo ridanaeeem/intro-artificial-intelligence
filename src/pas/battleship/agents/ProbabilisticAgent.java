@@ -89,7 +89,7 @@ public class ProbabilisticAgent
         int y = random.nextInt(boardHeight);
 
         // if no leads, attack randomly diagonally 
-        if ((hitCoordinates.size() == 0) || (enemyBoard[prevX][prevY] == miss)){
+        if ((attackedCoordinates.size() == 0) || (enemyBoard[prevX][prevY] == miss)){
             // ensure diagonality first
             if (x % 2 == 0) {
                 while (y % 2 != 0) {
