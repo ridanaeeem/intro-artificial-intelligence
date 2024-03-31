@@ -59,9 +59,13 @@ public class ProbabilisticAgent
         int boardHeight = gameConstants.getNumRows();
         // ships
         Map<ShipType, Integer> myShips = gameConstants.getShipTypeToPopulation();
-        // Map<ShipType, java.lang.Integer> enemyShips = PlayerView.getEnemyShipTypeToNumRemaining();
-        // ship types
-        ArrayList<ShipType> shipTypes = new ArrayList<>();
+        Map<ShipType, java.lang.Integer> enemyShips = game.getEnemyShipTypeToNumRemaining();
+        ArrayList<Integer> shipSizes = new ArrayList<>();
+        for (Map.Entry<ShipType, Integer> entry : enemyShips.entrySet()) {
+            ShipType ship = entry.getKey();
+            Integer numRemaining = entry.getValue();
+            shipSizes.add(Ship.getShipSize(ship));
+        }
 
         int prevX;
         int prevY;
@@ -76,22 +80,29 @@ public class ProbabilisticAgent
 
         Random random = new Random();
         
-        // initialize all coordinates
-        int options = 0;
+        // initialize all diagonal coordinates
+        // int options = 0;
         for (int x=0; x<boardWidth; x++){
             for (int y=0; y<boardHeight; y++){
                 if (!attackedCoordinates.contains(new Coordinate(x, y))){
-                    if (x % 2 == 0 && y % 2 == 0) {
-                        options++;
+                    // check for diagonality
+                    if ((x % 2 == 0 && y % 2 == 0) || (x % 2 != 0 && y % 2 != 0)){
                         if (!diagonalCoordinates.contains(new Coordinate(x,y))) diagonalCoordinates.add(new Coordinate(x, y));
+                        // if (!shipSizes.contains(2) && !shipSizes.contains(3)){
+                        //     if (shipSizes.contains(4) || shipSizes.contains(5)){
+                        //         if (missedCoordinates.contains(new Coordinate(x,y)))
+                        //         if (!diagonalCoordinates.contains(new Coordinate(x,y))) diagonalCoordinates.add(new Coordinate(x, y));
+                        //     } else {
+                        //         if (!diagonalCoordinates.contains(new Coordinate(x,y))) diagonalCoordinates.add(new Coordinate(x, y));
+                        //     }
+                        // } else {
+                        //     if (!diagonalCoordinates.contains(new Coordinate(x,y))) diagonalCoordinates.add(new Coordinate(x, y));
+                        // }
                     } 
-                    else if (x % 2 != 0 && y % 2 != 0){
-                        options++;
-                        if (!diagonalCoordinates.contains(new Coordinate(x,y))) diagonalCoordinates.add(new Coordinate(x, y));
-                    }
                 } 
             }
         }
+        int options = diagonalCoordinates.size();
         System.out.println("diag coords: " + diagonalCoordinates);
         System.out.println("options: " + options);
 
