@@ -28,6 +28,7 @@ public class ProbabilisticAgent
         System.out.println("[INFO] ProbabilisticAgent.ProbabilisticAgent: constructed agent");
     }
 
+    public final ArrayList<Coordinate> diagonalCoordinates = new ArrayList<Coordinate>();
     public final ArrayList<Coordinate> attackedCoordinates = new ArrayList<Coordinate>();
     public final ArrayList<Coordinate> hitCoordinates = new ArrayList<Coordinate>();
     public final ArrayList<Coordinate> missedCoordinates = new ArrayList<Coordinate>();
@@ -44,6 +45,7 @@ public class ProbabilisticAgent
     EnemyBoard.Outcome hit = EnemyBoard.Outcome.HIT;
     EnemyBoard.Outcome sunk = EnemyBoard.Outcome.SUNK;
     EnemyBoard.Outcome miss = EnemyBoard.Outcome.MISS;
+    EnemyBoard.Outcome unknown = EnemyBoard.Outcome.UNKNOWN;
 
     @Override
     public Coordinate makeMove(final GameView game)
@@ -74,6 +76,25 @@ public class ProbabilisticAgent
 
         Random random = new Random();
         
+        // initialize all coordinates
+        int options = 0;
+        for (int x=0; x<boardWidth; x++){
+            for (int y=0; y<boardHeight; y++){
+                if (!attackedCoordinates.contains(new Coordinate(x, y))){
+                    if (x % 2 == 0 && y % 2 == 0) {
+                        options++;
+                        if (!diagonalCoordinates.contains(new Coordinate(x,y))) diagonalCoordinates.add(new Coordinate(x, y));
+                    } 
+                    else if (x % 2 != 0 && y % 2 != 0){
+                        options++;
+                        if (!diagonalCoordinates.contains(new Coordinate(x,y))) diagonalCoordinates.add(new Coordinate(x, y));
+                    }
+                } 
+            }
+        }
+        System.out.println("diag coords: " + diagonalCoordinates);
+        System.out.println("options: " + options);
+
         if (enemyBoard[prevX][prevY] == hit) {
             lastHit = new Coordinate(prevX, prevY);
             // if (haveSunk){
@@ -165,6 +186,7 @@ public class ProbabilisticAgent
                 // if we reach an indicator 
                 if (attackedCoordinates.contains(top) || top.getYCoordinate() < 0){
                     System.out.println("indicator at top: " + top.getXCoordinate() + " " + top.getYCoordinate());
+                    System.out.println("contains? " + attackedCoordinates.contains(top) + " too high? " + top.getYCoordinate() + " " + boardHeight);
                     prTop = 0;
                 // have not explored, this has potential
                 } else {
@@ -185,6 +207,7 @@ public class ProbabilisticAgent
                 // if we reach an indicator 
                 if (attackedCoordinates.contains(bottom) || bottom.getYCoordinate() >= boardHeight){
                     System.out.println("indicator at bottom: " + bottom.getXCoordinate() + " " + bottom.getYCoordinate());
+                    System.out.println("contains? " + attackedCoordinates.contains(bottom) + " too high? " + bottom.getYCoordinate() + " " + boardHeight);
                     prBottom = 0;
                 // have not explored, this has potential
                 } else {
@@ -204,6 +227,7 @@ public class ProbabilisticAgent
                 // if we reach an indicator 
                 if (attackedCoordinates.contains(left) || left.getXCoordinate() < 0){
                     System.out.println("indicator at left: " + left.getXCoordinate() + " " + left.getYCoordinate());
+                    System.out.println("contains? " + attackedCoordinates.contains(left) + " too high? " + left.getXCoordinate() + " " + boardWidth);
                     prLeft = 0;
                 // have not explored, this has potential
                 } else {
@@ -213,6 +237,7 @@ public class ProbabilisticAgent
                 }
             }if (prTop == 0 && prBottom == 0 && prLeft == 0 && prRight != 0){
                 System.out.println("right has potential");
+                System.out.println("contains" + attackedCoordinates.contains(right) + " " + right.getXCoordinate() + " " + boardWidth);
                 // can keep expanding
                 if (hitCoordinates.contains(right)){
                     // keep expanding right
@@ -232,93 +257,43 @@ public class ProbabilisticAgent
                 }
             } 
             if (prTop == 0 && prBottom == 0 && prLeft == 0 && prRight == 0) {
-                System.out.println("no potential");
-                // ensure diagonality first
-                if (x % 2 == 0) {
-                    while (y % 2 != 0) {
-                        y = random.nextInt(boardHeight);
-                    }
-                } else {
-                    while (y % 2 == 0) {
-                        y = random.nextInt(boardHeight);
-                    }
-                }
-                // then check and see if it would be a waste to attack a set of coordinates
-                while (attackedCoordinates.contains(new Coordinate(x, y))) {
-                    x = random.nextInt(boardWidth);
-                    if (x % 2 == 0) {
-                        while (y % 2 != 0) {
-                            y = random.nextInt(boardHeight);
-                        }
-                    } else {
-                        while (y % 2 == 0) {
-                            y = random.nextInt(boardHeight);
-                        }
-                    }
-                }
-                attackedCoordinates.add(new Coordinate(x, y));  
+                int randomIndex = random.nextInt(options);
+                Coordinate randomCoordinate = diagonalCoordinates.get(randomIndex);
+                x = randomCoordinate.getXCoordinate();
+                y = randomCoordinate.getYCoordinate(); 
             }
             System.out.println("probs: " + prTop + " " + prBottom + " " + prLeft + " " + prRight);
             
         } else {
-            // ensure diagonality first
-            if (x % 2 == 0) {
-                while (y % 2 != 0) {
-                    y = random.nextInt(boardHeight);
-                }
-            } else {
-                while (y % 2 == 0) {
-                    y = random.nextInt(boardHeight);
-                }
-            }
-            // then check and see if it would be a waste to attack a set of coordinates
-            while (attackedCoordinates.contains(new Coordinate(x, y))) {
-                x = random.nextInt(boardWidth);
-                if (x % 2 == 0) {
-                    while (y % 2 != 0) {
-                        y = random.nextInt(boardHeight);
-                    }
-                } else {
-                    while (y % 2 == 0) {
-                        y = random.nextInt(boardHeight);
-                    }
-                }
-            }
+            int randomIndex = random.nextInt(options);
+            Coordinate randomCoordinate = diagonalCoordinates.get(randomIndex);
+            x = randomCoordinate.getXCoordinate();
+            y = randomCoordinate.getYCoordinate();
         }
 
+        // for (int row=0; row<boardWidth; row++){
+        //     for (int col=0; col<boardHeight; col++){
+        //         if (enemyBoard[row][col] == unknown){
+        //             System.out.println("all sides are misses");
+        //             x = row;
+        //             y = col;
+        //             missedCoordinates.add(new Coordinate(row, col));
+        //         }
+        //     }
+        // }
+                
         if (x >= boardWidth || y >= boardHeight || x < 0 || y < 0 || attackedCoordinates.contains(new Coordinate(x, y))) {
             System.out.println("fixing!!" + x + " " + y);
-            x = random.nextInt(boardWidth);
-            // ensure diagonality first
-            if (x % 2 == 0) {
-                while (y % 2 != 0) {
-                    y = random.nextInt(boardHeight);
-                }
-            } else if (x % 2 != 0) {
-                while (y % 2 == 0) {
-                    y = random.nextInt(boardHeight);
-                }
-            }
-            // then check and see if it would be a waste to attack a set of coordinates
-            if (attackedCoordinates.contains(new Coordinate(x, y))) {
-                while (attackedCoordinates.contains(new Coordinate(x, y))) {
-                    x = random.nextInt(boardWidth);
-                    if (x % 2 == 0) {
-                        while (y % 2 != 0) {
-                            y = random.nextInt(boardHeight);
-                        }
-                    } else if (x % 2 != 0) {
-                        while (y % 2 == 0) {
-                            y = random.nextInt(boardHeight);
-                        }
-                    }
-                }
-            }
+            int randomIndex = random.nextInt(options);
+            Coordinate randomCoordinate = diagonalCoordinates.get(randomIndex);
+            x = randomCoordinate.getXCoordinate();
+            y = randomCoordinate.getYCoordinate();
         }
 
         System.out.println("im gonna attack " + x + " " + y);
         System.out.println(" ");
         attackedCoordinates.add(new Coordinate(x, y));
+        if (diagonalCoordinates.contains(new Coordinate(x,y))) diagonalCoordinates.remove(new Coordinate(x, y));
         return new Coordinate(x, y); 
     }
     
