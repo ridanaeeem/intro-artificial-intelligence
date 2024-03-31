@@ -104,6 +104,8 @@ public class ProbabilisticAgent
             if (!hitCoordinates.contains(lastHit)){
                 lastHit = hitCoordinates.get(hitCoordinates.size() - 1);
             }
+        } else {
+            hitSearch = false;
         }
 
         System.out.println("hit coords: " + hitCoordinates);
@@ -162,6 +164,7 @@ public class ProbabilisticAgent
                 } 
                 // if we reach an indicator 
                 if (attackedCoordinates.contains(top) || top.getYCoordinate() < 0){
+                    System.out.println("indicator at top: " + top.getXCoordinate() + " " + top.getYCoordinate());
                     prTop = 0;
                 // have not explored, this has potential
                 } else {
@@ -170,7 +173,7 @@ public class ProbabilisticAgent
                     y = top.getYCoordinate();
                 }
             }
-            else if (prBottom != 0){
+            if (prTop == 0 && prBottom != 0){
                 System.out.println("bottom has potential");
                 // can keep expanding
                 if (hitCoordinates.contains(bottom)){
@@ -181,6 +184,7 @@ public class ProbabilisticAgent
                 } 
                 // if we reach an indicator 
                 if (attackedCoordinates.contains(bottom) || bottom.getYCoordinate() >= boardHeight){
+                    System.out.println("indicator at bottom: " + bottom.getXCoordinate() + " " + bottom.getYCoordinate());
                     prBottom = 0;
                 // have not explored, this has potential
                 } else {
@@ -188,7 +192,7 @@ public class ProbabilisticAgent
                     x = bottom.getXCoordinate();
                     y = bottom.getYCoordinate();
                 }
-            } else if (prLeft != 0){
+            } if (prTop == 0 && prBottom == 0 && prLeft != 0){
                 System.out.println("left has potential");
                 // can keep expanding
                 if (hitCoordinates.contains(left)){
@@ -199,6 +203,7 @@ public class ProbabilisticAgent
                 } 
                 // if we reach an indicator 
                 if (attackedCoordinates.contains(left) || left.getXCoordinate() < 0){
+                    System.out.println("indicator at left: " + left.getXCoordinate() + " " + left.getYCoordinate());
                     prLeft = 0;
                 // have not explored, this has potential
                 } else {
@@ -206,13 +211,14 @@ public class ProbabilisticAgent
                     x = left.getXCoordinate();
                     y = left.getYCoordinate();
                 }
-            } else if (prRight != 0){
+            }if (prTop == 0 && prBottom == 0 && prLeft == 0 && prRight != 0){
                 System.out.println("right has potential");
                 // can keep expanding
                 if (hitCoordinates.contains(right)){
                     // keep expanding right
                     while (hitCoordinates.contains(right)){ 
                         right = new Coordinate(right.getXCoordinate() + 1, right.getYCoordinate());
+                        System.out.println("indicator at right: " + right.getXCoordinate() + " " + right.getYCoordinate());
                     }
                 } 
                 // if we reach an indicator 
