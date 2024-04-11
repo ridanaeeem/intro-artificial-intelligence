@@ -136,6 +136,95 @@ public class NaiveBayesAgent
                 f4ZombieProbs.add(f4Zombie.get(i) / totalZombies);
             }
 
+
+            // CONTINUOUS features
+            //
+            // feature 1
+            // mean of feature 1 for humans
+            double f1HumanMean = 0;
+            // mean of feature 1 for zombies
+            double f1ZombieMean = 0;
+            // sum of feature 1 for humans
+            double f1HumanSum = 0;
+            // sum of feature 1 for zombies
+            double f1ZombieSum = 0;
+            // go through every row of y_gt
+            // increment corresponding value of feature 1
+            for (int i = 0; i < numDataPoints; i++) {
+                // if human
+                if (y_gt.get(i, 0) == 0) {
+                    f1HumanSum += X.get(i, 0);
+                // if zombie
+                } else if (y_gt.get(i, 0) == 1) {
+                    f1ZombieSum += X.get(i, 0);
+                }
+            }
+            f1HumanMean = f1HumanSum / totalHumans;
+            f1ZombieMean = f1ZombieSum / totalZombies;
+            System.out.println("f1HumanMean " + f1HumanMean);
+            System.out.println("f1ZombieMean " + f1ZombieMean);
+            // standard deviation of feature 1 for humans
+            double f1HumanStdDev = 0;
+            // standard deviation of feature 1 for zombies
+            double f1ZombieStdDev = 0;
+            // go through every row of y_gt
+            // increment corresponding value of feature 1
+            for (int i = 0; i < numDataPoints; i++) {
+                // if human
+                if (y_gt.get(i, 0) == 0) {
+                    f1HumanStdDev += Math.pow(X.get(i, 0) - f1HumanMean, 2);
+                // if zombie
+                } else if (y_gt.get(i, 0) == 1) {
+                    f1ZombieStdDev += Math.pow(X.get(i, 0) - f1ZombieMean, 2);
+                }
+            }
+            f1HumanStdDev = (f1HumanStdDev / totalHumans);
+            f1ZombieStdDev = (f1ZombieStdDev / totalZombies);
+            System.out.println("f1HumanStdDev squared " + f1HumanStdDev);
+            System.out.println("f1ZombieStdDev squared " + f1ZombieStdDev);
+
+            // feature 2
+            // mean of feature 2 for humans
+            double f2HumanMean = 0;
+            // mean of feature 2 for zombies
+            double f2ZombieMean = 0;
+            // sum of feature 2 for humans
+            double f2HumanSum = 0;
+            // sum of feature 2 for zombies
+            double f2ZombieSum = 0;
+            // go through every row of y_gt
+            for (int i = 0; i < numDataPoints; i++) {
+                // if human
+                if (y_gt.get(i, 0) == 0) {
+                    f2HumanSum += X.get(i, 1);
+                // if zombie
+                } else if (y_gt.get(i, 0) == 1) {
+                    f2ZombieSum += X.get(i, 1);
+                }
+            }
+            f2HumanMean = f2HumanSum / totalHumans;
+            f2ZombieMean = f2ZombieSum / totalZombies;
+            System.out.println("f2HumanMean " + f2HumanMean);
+            System.out.println("f2ZombieMean " + f2ZombieMean);
+            // standard deviation of feature 2 for humans
+            double f2HumanStdDev = 0;
+            // standard deviation of feature 2 for zombies
+            double f2ZombieStdDev = 0;
+            // go through every row of y_gt
+            for (int i = 0; i < numDataPoints; i++) {
+                // if human
+                if (y_gt.get(i, 0) == 0) {
+                    f2HumanStdDev += Math.pow(X.get(i, 1) - f2HumanMean, 2);
+                // if zombie
+                } else if (y_gt.get(i, 0) == 1) {
+                    f2ZombieStdDev += Math.pow(X.get(i, 1) - f2ZombieMean, 2);
+                }
+            }
+            f2HumanStdDev = (f2HumanStdDev / totalHumans);
+            f2ZombieStdDev = (f2ZombieStdDev / totalZombies);
+            System.out.println("f2HumanStdDev squared " + f2HumanStdDev);
+            System.out.println("f2ZombieStdDev squared " + f2ZombieStdDev);
+
             // System.out.println("f3HumanProbs " + f3HumanProbs);
             // System.out.println("f3ZombieProbs " + f3ZombieProbs);
             // System.out.println("f4HumanProbs " + f4HumanProbs);
