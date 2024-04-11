@@ -45,6 +45,21 @@ public class NaiveBayesAgent
         List<Double> f4ZombieProbs = new ArrayList<Double>();
 
         // CONTINUOUS features
+        // mean of feature 1 for humans
+        double f1HumanMean = 0;
+        // mean of feature 1 for zombies
+        double f1ZombieMean = 0;
+        // sum of feature 1 for humans
+        double f1HumanSum = 0;
+        // sum of feature 1 for zombies
+        double f1ZombieSum = 0;
+        // mean of feature 2 for humans
+        double f2HumanMean = 0;
+        // mean of feature 2 for zombies
+        double f2ZombieMean = 0;
+        // sum of feature 2 for humans
+        double f2HumanSum = 0;
+        // sum of feature 2 for zombies
         // basically turn continuous into discrete
         // feature 1
         Pair <Double, Double> f1HumanStd1 = new Pair<Double, Double>(0.0, 0.0);
@@ -95,12 +110,12 @@ public class NaiveBayesAgent
             //
             // feature 3: domain {0,1,2}
             // how many humans have these particular feature values
-            List<Integer> f3Human = new ArrayList<Integer>();
+            List<Double> f3Human = new ArrayList<Double>();
             // how many zombies have these particular feature values
-            List<Integer> f3Zombie = new ArrayList<Integer>();
+            List<Double> f3Zombie = new ArrayList<Double>();
             for (int i = 0; i < 3; i++) {
-                f3Human.add(0);
-                f3Zombie.add(0);
+                f3Human.add(0.0);
+                f3Zombie.add(0.0);
             }
             // go through every row of y_gt
             // incremenet corresponding value of feature 3
@@ -115,17 +130,44 @@ public class NaiveBayesAgent
                     f3Zombie.set((int)X.get(i, 2), f3Zombie.get((int)X.get(i, 2)) + 1);
                 }
             }
+            // redistrubte in case 0 probability
+            for (int i = 0; i < 3; i++) {
+                if (f3Human.get(i) == 0) {
+                    double f3HumanRedistributeAmount = 0.0;
+                    for (int j = 0; j < 3; j++) {
+                        if (f3Human.get(j) != 0) {
+                            f3HumanRedistributeAmount += 0.1;
+                        }
+                    }
+                    double f3HumanRedistribution = f3HumanRedistributeAmount/3;
+                    for (int j = 0; j < 3; j++) {
+                        f3Human.set(j, f3Human.get(j) + f3HumanRedistribution);
+                    }
+                }
+                if (f3Zombie.get(i) == 0) {
+                    double f3ZombieRedistributeAmount = 0.0;
+                    for (int j = 0; j < 3; j++) {
+                        if (f3Zombie.get(j) != 0) {
+                            f3ZombieRedistributeAmount += 0.1;
+                        }
+                    }
+                    double f3ZombieRedistribution = f3ZombieRedistributeAmount/3;
+                    for (int j = 0; j < 3; j++) {
+                        f3Zombie.set(j, f3Zombie.get(j) + f3ZombieRedistribution);
+                    }
+                }
+            }
             // System.out.println("f3Human " + f3Human);
             // System.out.println("f3Zombie " + f3Zombie);
 
             // feature 4: domain {0,1,2,3}
             // how many humans have these particular feature values
-            List<Integer> f4Human = new ArrayList<Integer>();
+            List<Double> f4Human = new ArrayList<Double>();
             // how many zombies have these particular feature values
-            List<Integer> f4Zombie = new ArrayList<Integer>();
+            List<Double> f4Zombie = new ArrayList<Double>();
             for (int i = 0; i < 4; i++) {
-                f4Human.add(0);
-                f4Zombie.add(0);
+                f4Human.add(0.0);
+                f4Zombie.add(0.0);
             }
             // go through every row of y_gt
             // incremenet corresponding value of feature 4
@@ -138,6 +180,33 @@ public class NaiveBayesAgent
                 // if zombie
                 } else if (y_gt.get(i, 0) == 1) {
                     f4Zombie.set((int)X.get(i, 3), f4Zombie.get((int)X.get(i, 3)) + 1);
+                }
+            }
+            // redistrubte in case 0 probability
+            for (int i = 0; i < 3; i++) {
+                if (f4Human.get(i) == 0) {
+                    double f4HumanRedistributeAmount = 0.0;
+                    for (int j = 0; j < 3; j++) {
+                        if (f4Human.get(j) != 0) {
+                            f4HumanRedistributeAmount += 0.1;
+                        }
+                    }
+                    double f4HumanRedistribution = f4HumanRedistributeAmount/3;
+                    for (int j = 0; j < 3; j++) {
+                        f4Human.set(j, f4Human.get(j) + f4HumanRedistribution);
+                    }
+                }
+                if (f4Zombie.get(i) == 0) {
+                    double f4ZombieRedistributeAmount = 0.0;
+                    for (int j = 0; j < 3; j++) {
+                        if (f4Zombie.get(j) != 0) {
+                            f4ZombieRedistributeAmount += 0.1;
+                        }
+                    }
+                    double f4ZombieRedistribution = f4ZombieRedistributeAmount/3;
+                    for (int j = 0; j < 3; j++) {
+                        f4Zombie.set(j, f4Zombie.get(j) + f4ZombieRedistribution);
+                    }
                 }
             }
             // System.out.println("f4Human " + f4Human);
@@ -161,14 +230,6 @@ public class NaiveBayesAgent
             // CONTINUOUS features
             //
             // feature 1
-            // mean of feature 1 for humans
-            double f1HumanMean = 0;
-            // mean of feature 1 for zombies
-            double f1ZombieMean = 0;
-            // sum of feature 1 for humans
-            double f1HumanSum = 0;
-            // sum of feature 1 for zombies
-            double f1ZombieSum = 0;
             // go through every row of y_gt
             // increment corresponding value of feature 1
             for (int i = 0; i < numDataPoints; i++) {
@@ -219,13 +280,6 @@ public class NaiveBayesAgent
 
 
             // feature 2
-            // mean of feature 2 for humans
-            double f2HumanMean = 0;
-            // mean of feature 2 for zombies
-            double f2ZombieMean = 0;
-            // sum of feature 2 for humans
-            double f2HumanSum = 0;
-            // sum of feature 2 for zombies
             double f2ZombieSum = 0;
             // go through every row of y_gt
             for (int i = 0; i < numDataPoints; i++) {
@@ -317,6 +371,13 @@ public class NaiveBayesAgent
                 f1ZombieProb = .0001;
             }
 
+            if (f1HumanProb == f1ZombieProb){
+                double f1DiffHuman = Math.abs(f1 - f1HumanMean);
+                double f1DiffZombie = Math.abs(f1 - f1ZombieMean);
+                f1HumanProb = f1DiffHuman/(f1DiffHuman + f1DiffZombie);
+                f1ZombieProb = f1DiffZombie/(f1DiffHuman + f1DiffZombie);
+            }
+
             double f2HumanProb = 0;
             double f2ZombieProb = 0;
             if (f2 >= f2HumanStd1.getFirst() && f2 <= f2HumanStd1.getSecond()) {
@@ -337,6 +398,13 @@ public class NaiveBayesAgent
                 f2ZombieProb = 003;
             } else {
                 f2ZombieProb = .0001;
+            }
+
+            if (f2HumanProb == f2ZombieProb){
+                double f2DiffHuman = Math.abs(f2 - f2HumanMean);
+                double f2DiffZombie = Math.abs(f2 - f2ZombieMean);
+                f2HumanProb = f2DiffHuman/(f2DiffHuman + f2DiffZombie);
+                f2ZombieProb = f2DiffZombie/(f2DiffHuman + f2DiffZombie);
             }
 
             double humanProb = f1HumanProb * f2HumanProb * f3HumanProbs.get(f3) * f4HumanProbs.get(f4); 
