@@ -4,6 +4,7 @@ package src.labs.zombayes.agents;
 // SYSTEM IMPORTS
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -162,21 +163,214 @@ public class DecisionTreeAgent
 
 
             // TODO: complete me!
-            private int pickBestFeature(Matrix X, Matrix y_gt, Set<Integer> availableColIdxs)
-            {
-                return -1;
+            private int pickBestFeature(Matrix X, Matrix y_gt, Set<Integer> availableColIdxs) {
+                System.out.println("pickbestfeature");
+                InteriorNode potentialHead;
+                ArrayList<Pair<Double, Integer>> featureEntropies = new ArrayList<Pair<Double, Integer>>();
+                for (int colIdx : availableColIdxs) {
+                    potentialHead = new InteriorNode(X, y_gt, availableColIdxs);
+                    try {
+                        // entropy of the feature before splitting based on feature values
+                        // before should just be the feature --> 0 and 1
+                        Pair<Double, Matrix> beforeEntropy = potentialHead.getConditionalEntropy(X, y_gt, colIdx);
+                        featureEntropies.add(new Pair<Double, Integer>(beforeEntropy.getFirst(), colIdx));
+                        // find the best feature to split on
+                        // this uses the entropy of the feature before splitting based on feature values
+                        // int bestFeature = potentialHead.pickBestFeature(X, y_gt, availableColIdxs);
+                    } catch (Exception e) {
+                        System.out.println("error");
+                        // Handle the exception here
+                        e.printStackTrace();
+                    }
+                }
+                System.out.println("feature entropies");
+                for (Pair<Double, Integer> featureEntropy : featureEntropies) {
+                    System.out.println(featureEntropy.getFirst() + " " + featureEntropy.getSecond());
+                }
+                int bestColIdx = -1;
+                double bestEntropy = Double.NEGATIVE_INFINITY;
+                for (Pair<Double, Integer> featureEntropy : featureEntropies) {
+                    if (featureEntropy.getFirst() > bestEntropy) {
+                        bestColIdx = featureEntropy.getSecond();
+                        bestEntropy = featureEntropy.getFirst();
+                    }
+                }
+                return bestColIdx;
             }
 
             // TODO: complete me!
             private Pair<Double, Matrix> getConditionalEntropy(Matrix X, Matrix y_gt, int colIdx) throws Exception
             {
-                return null;
+                System.out.println("getConditionalEntropy");
+                if (colIdx == 2) {
+                    // Matrix colMatrix = X.getCol(2);
+                    System.out.println("Entropy function " + Entropy.entropy(X, 2));
+                    // manually calculate the conditional entropy
+                    // feature 3 options: 0, 1, 2
+                    double f3HumanCount = 0.0;
+                    double f3ZombieCount = 0.0;
+                    double f30Count = 0.0;
+                    double f31Count = 0.0;
+                    double f32Count = 0.0;
+                    double f30HumanCount = 0.0;
+                    double f31HumanCount = 0.0;
+                    double f32HumanCount = 0.0;
+                    double f30ZombieCount = 0.0;
+                    double f31ZombieCount = 0.0;
+                    double f32ZombieCount = 0.0;
+                    // calculate before split
+                    for (int i=0; i < y_gt.getShape().getNumRows(); i++){
+                        if (y_gt.get(i, 0) == 0){
+                            f3HumanCount++;
+                        } else {
+                            f3ZombieCount++;
+                        }
+                    }
+                    double f3TotalCount = f3HumanCount + f3ZombieCount;
+                    double bEntropy = ((f3HumanCount / f3TotalCount) * (Math.log(f3HumanCount / f3TotalCount) / Math.log(2))) + ((f3ZombieCount / f3TotalCount) * (Math.log(f3ZombieCount / f3TotalCount) / Math.log(2)));
+                    bEntropy = -bEntropy;
+                    // System.out.println("f3HumanCount " + f3HumanCount);
+                    // System.out.println("f3ZombieCount " + f3ZombieCount);
+                    // System.out.println("f3 human log term " + (f3HumanCount / f3TotalCount) * (Math.log10(f3HumanCount / f3TotalCount) / Math.log10(2)));
+                    // System.out.println("f3 zombie log term " + (f3ZombieCount / f3TotalCount) * (Math.log10(f3ZombieCount / f3TotalCount) / Math.log10(2)));
+                    System.out.println("bEntropy " + bEntropy);
+                    // calculate after split
+                    for (int i=0; i < X.getShape().getNumRows(); i++){
+                        if (X.get(i, 2) == 0){
+                            f30Count++;
+                            if (y_gt.get(i, 0) == 0){
+                                f30HumanCount++;
+                            } else {
+                                f30ZombieCount++;
+                            }
+                        } else if (X.get(i, 2) == 1){
+                            f31Count++;
+                            if (y_gt.get(i, 0) == 0){
+                                f31HumanCount++;
+                            } else {
+                                f31ZombieCount++;
+                            }
+                        } else {
+                            f32Count++;
+                            if (y_gt.get(i, 0) == 0){
+                                f32HumanCount++;
+                            } else {
+                                f32ZombieCount++;
+                            }
+                        }
+                    }
+                    // System.out.println("f30HumanCount " + f30HumanCount);
+                    // System.out.println("f30ZombieCount " + f30ZombieCount);
+                    // System.out.println("f31HumanCount " + f31HumanCount);
+                    // System.out.println("f31ZombieCount " + f31ZombieCount);
+                    // System.out.println("f32HumanCount " + f32HumanCount);
+                    // System.out.println("f32ZombieCount " + f32ZombieCount);
+                    double f30Entropy = ((f30HumanCount / f30Count) * (Math.log(f30HumanCount / f30Count) / Math.log(2))) + ((f30ZombieCount / f30Count) * (Math.log(f30ZombieCount / f30Count) / Math.log(2)));
+                    double f31Entropy = ((f31HumanCount / f31Count) * (Math.log(f31HumanCount / f31Count) / Math.log(2))) + ((f31ZombieCount / f31Count) * (Math.log(f31ZombieCount / f31Count) / Math.log(2)));
+                    double f32Entropy = ((f32HumanCount / f32Count) * (Math.log(f32HumanCount / f32Count) / Math.log(2))) + ((f32ZombieCount / f32Count) * (Math.log(f32ZombieCount / f32Count) / Math.log(2)));
+                    double aEntropy = ((f30Count / f3TotalCount) * -f30Entropy) + ((f31Count / f3TotalCount) * -f31Entropy) + ((f32Count / f3TotalCount) * -f32Entropy);
+                    // System.out.println("f30Entropy " + f30Entropy);
+                    // System.out.println("f31Entropy " + f31Entropy);
+                    // System.out.println("f32Entropy " + f32Entropy);
+                    System.out.println("aEntropy " + aEntropy);
+                    System.out.println("information gain " + (bEntropy - aEntropy));
+                    return new Pair<Double, Matrix>((bEntropy - aEntropy), X);
+                } else if (colIdx == 3) {
+                    // Matrix colMatrix = X.getCol(3);
+                    System.out.println("Entropy function " + Entropy.entropy(X, 3));
+                    // manually calculate the conditional entropy
+                    // feature 4 options: 0, 1, 2, 3
+                    double f4HumanCount = 0.0;
+                    double f4ZombieCount = 0.0;
+                    double f40Count = 0.0;
+                    double f41Count = 0.0;
+                    double f42Count = 0.0;
+                    double f43Count = 0.0;
+                    double f40HumanCount = 0.0;
+                    double f41HumanCount = 0.0;
+                    double f42HumanCount = 0.0;
+                    double f43HumanCount = 0.0;
+                    double f40ZombieCount = 0.0;
+                    double f41ZombieCount = 0.0;
+                    double f42ZombieCount = 0.0;
+                    double f43ZombieCount = 0.0;
+                    // calculate before split
+                    for (int i=0; i < y_gt.getShape().getNumRows(); i++){
+                        if (y_gt.get(i, 0) == 0){
+                            f4HumanCount++;
+                        } else {
+                            f4ZombieCount++;
+                        }
+                    }
+                    double f4TotalCount = f4HumanCount + f4ZombieCount;
+                    double bEntropy = ((f4HumanCount / f4TotalCount) * (Math.log(f4HumanCount / f4TotalCount) / Math.log(2))) + ((f4ZombieCount / f4TotalCount) * (Math.log(f4ZombieCount / f4TotalCount) / Math.log(2)));
+                    bEntropy = -bEntropy;
+                    // System.out.println("f4HumanCount " + f4HumanCount);
+                    // System.out.println("f4ZombieCount " + f4ZombieCount);
+                    // System.out.println("f4 human log term " + (f4HumanCount / f4TotalCount) * (Math.log10(f4HumanCount / f4TotalCount) / Math.log10(2)));
+                    // System.out.println("f4 zombie log term " + (f4ZombieCount / f4TotalCount) * (Math.log10(f4ZombieCount / f4TotalCount) / Math.log10(2)));
+                    System.out.println("bEntropy " + bEntropy);
+                    // calculate after split
+                    for (int i=0; i < X.getShape().getNumRows(); i++){
+                        if (X.get(i, 3) == 0){
+                            f40Count++;
+                            if (y_gt.get(i, 0) == 0){
+                                f40HumanCount++;
+                            } else {
+                                f40ZombieCount++;
+                            }
+                        } else if (X.get(i, 3) == 1){
+                            f41Count++;
+                            if (y_gt.get(i, 0) == 0){
+                                f41HumanCount++;
+                            } else {
+                                f41ZombieCount++;
+                            }
+                        } else if (X.get(i, 3) == 2){
+                            f42Count++;
+                            if (y_gt.get(i, 0) == 0){
+                                f42HumanCount++;
+                            } else {
+                                f42ZombieCount++;
+                            }
+                        } else {
+                            f43Count++;
+                            if (y_gt.get(i, 0) == 0){
+                                f43HumanCount++;
+                            } else {
+                                f43ZombieCount++;
+                            }
+                        }
+                    }
+                    // System.out.println("f40HumanCount " + f40HumanCount);
+                    // System.out.println("f40ZombieCount " + f40ZombieCount);
+                    // System.out.println("f41HumanCount " + f41HumanCount);
+                    // System.out.println("f41ZombieCount " + f41ZombieCount);
+                    // System.out.println("f42HumanCount " + f42HumanCount);
+                    // System.out.println("f42ZombieCount " + f42ZombieCount);
+                    // System.out.println("f43HumanCount " + f43HumanCount);
+                    // System.out.println("f43ZombieCount " + f43ZombieCount);
+                    double f40Entropy = ((f40HumanCount / f40Count) * (Math.log(f40HumanCount / f40Count) / Math.log(2))) + ((f40ZombieCount / f40Count) * (Math.log(f40ZombieCount / f40Count) / Math.log(2)));
+                    double f41Entropy = ((f41HumanCount / f41Count) * (Math.log(f41HumanCount / f41Count) / Math.log(2))) + ((f41ZombieCount / f41Count) * (Math.log(f41ZombieCount / f41Count) / Math.log(2)));
+                    double f42Entropy = ((f42HumanCount / f42Count) * (Math.log(f42HumanCount / f42Count) / Math.log(2))) + ((f42ZombieCount / f42Count) * (Math.log(f42ZombieCount / f42Count) / Math.log(2)));
+                    double f43Entropy = ((f43HumanCount / f43Count) * (Math.log(f43HumanCount / f43Count) / Math.log(2))) + ((f43ZombieCount / f43Count) * (Math.log(f43ZombieCount / f43Count) / Math.log(2)));
+                    double aEntropy = ((f40Count / f4TotalCount) * -f40Entropy) + ((f41Count / f4TotalCount) * -f41Entropy) + ((f42Count / f4TotalCount) * -f42Entropy) + ((f43Count / f4TotalCount) * -f43Entropy);
+                    // System.out.println("f40Entropy " + f40Entropy);
+                    // System.out.println("f41Entropy " + f41Entropy);
+                    // System.out.println("f42Entropy " + f42Entropy);
+                    // System.out.println("f43Entropy " + f43Entropy);
+                    System.out.println("aEntropy " + aEntropy);
+                    System.out.println("information gain " + (bEntropy - aEntropy));
+                    return new Pair<Double, Matrix>((bEntropy - aEntropy), X);
+                }
+                return new Pair<Double, Matrix>(-1.0, X);
             }
 
             // TODO: complete me!
             @Override
             public int predict(Matrix x)
             {
+                System.out.println("predict");
                 return -1;
             }
 
@@ -184,6 +378,7 @@ public class DecisionTreeAgent
             @Override
             public List<Pair<Matrix, Matrix> > getChildData() throws Exception
             {
+                System.out.println("getchilddata");
                 return null;
             }
 
@@ -206,8 +401,56 @@ public class DecisionTreeAgent
         // TODO: complete me!
         private Node dfsBuild(Matrix X, Matrix y_gt, Set<Integer> availableColIdxs) throws Exception
         {
-            return null;
+            System.out.println("dfsbuild");
+            // how many options should we compare?
+            int numOptions = availableColIdxs.size();
+            if (numOptions == 0) {
+                return new LeafNode(X, y_gt);
+            } else {
+                InteriorNode potentialHead = new InteriorNode(X, y_gt, availableColIdxs);
+                potentialHead.children = new ArrayList<>(potentialHead.pickBestFeature(X, y_gt, availableColIdxs));
+                // create a node for where we're currently at
+                // InteriorNode potentialHead = new InteriorNode(X, y_gt, availableColIdxs);
+                // potentialHead.children = new ArrayList<>(potentialHead.pickBestFeature(X, y_gt, availableColIdxs));
+                // find the best feature to split X on
+                // for (int colIdx : availableColIdxs) {
+                //     potentialHead = new InteriorNode(X, y_gt, availableColIdxs);
+                //     // entropy of the feature before splitting based on feature values
+                //     // before should just be the feature --> 0 and 1
+                //     // Pair<Double, Matrix> beforeEntropy = potentialHead.getConditionalEntropy(X, y_gt, colIdx); 
+                //     // find the best feature to split on
+                //     // this uses the entropy of the feature before splitting based on feature values
+                //     int bestFeature = potentialHead.pickBestFeature(X, y_gt, availableColIdxs);
+                // }
+            }
+            
+
+            System.out.println(X);
+            System.out.println(" ");
+            System.out.println(X.getRowMaskEq(1.0, 2));
+
+            // Set<Integer> remainingColIdxs = new HashSet<Integer>(availableColIdxs);
+            // for (int colIdx : availableColIdxs) {
+            //     Matrix colMatrix = X.getCol(colIdx);
+            //     System.out.println(Entropy.entropy(y_gt, colIdx));
+            // }
+
+            // look at the two discrete features first
+            // feature 3
+            
+            // if (availableColIdxs.contains(3)) {
+            //     Matrix colMatrix = X.getCol(3);
+            //     System.out.println(Entropy.entropy(colMatrix, 3));
+            // }
+
+            // InteriorNode head = new InteriorNode(X, y_gt, availableColIdxs);
+            // System.out.println(Entropy.entropy(X, 2));
+            // if (availableColIdxs.size() == 0) {
+            //     return new LeafNode(X, y_gt);
+            // }
+            return new LeafNode(X, y_gt);
         }
+        
 
         public void fit(Matrix X, Matrix y_gt)
         {
@@ -242,6 +485,8 @@ public class DecisionTreeAgent
     {
         super(playerNum, args);
         this.tree = new DecisionTree();
+        System.out.println("DecisionTreeAgent created");
+
     }
 
     public DecisionTree getTree() { return this.tree; }

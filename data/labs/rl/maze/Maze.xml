@@ -1,31 +1,23 @@
 <Configuration>
-	<Map>data/labs/zombayes/easy/tunnelMap.xml</Map>
+	<Map>data/labs/rl/maze/MazeMap.xml</Map>
 	<Player Id="0">
 		<AgentClass>
-			<ClassName>src.labs.zombayes.agents.DecisionTreeAgent</ClassName>
+			<ClassName>src.labs.rl.maze.agents.ValueIterationAgent</ClassName>
 			<Argument>0</Argument>
-            <Argument>12345</Argument>
-            <Argument>EASY</Argument>
 		</AgentClass>
 	</Player>
-	<!-- <Player Id="0">
+	<Player Id="0">
 		<AgentClass>
 			<ClassName>edu.cwru.sepia.agent.visual.VisualAgent</ClassName>
 			<Argument>true</Argument>
 			<Argument>false</Argument>
 		</AgentClass>
-	</Player> -->
-	<Player Id="1">
-		<AgentClass>
-			<ClassName>edu.bu.labs.zombayes.agents.ZombieAgent</ClassName>
-			<Argument>1</Argument>
-			<Argument>12345</Argument>
-            <Argument>EASY</Argument>
-		</AgentClass>
 	</Player>
 	<ModelParameters>
-		<Conquest>true</Conquest>
-		<Midas>false</Midas>
+		<Conquest>false</Conquest>
+		<Midas>true</Midas>
+        <Requirement Name="environment.model.RequiredGold" Value="1000"/>
+		<Requirement Name="environment.model.RequiredWood" Value="1000"/>
 		<ManifestDestiny>false</ManifestDestiny>
 		<TimeLimit>1000000</TimeLimit>
 	</ModelParameters>
