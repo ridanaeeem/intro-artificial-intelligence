@@ -75,11 +75,82 @@ public class ValueIterationAgent
     public void valueIteration(StateView state)
     {
         // TODO: complete me!
+        Map<Coordinate, Double> uMap = getZeroMap(state);
+        Map<Coordinate, Double> uPrimeMap = getZeroMap(state);
+        double delta = Double.POSITIVE_INFINITY;
+
+        int iter = 0;
+        while (delta >= (EPSILON * (1-GAMMA)) / GAMMA){
+            iter ++;
+            uMap = getZeroMap(state);
+            for (Coordinate c: uPrimeMap.keySet()){
+                Double copy = uPrimeMap.get(c);
+                uMap.put(c, copy);
+            }
+
+            // uPrimeMap = getZeroMap(state); 
+
+            delta=0;
+
+            for (Coordinate c: uMap.keySet()){
+                // bellman equation
+                // calculate U'(s) = R(s) + gamma * max_a(sum_s' P(s'|s,a)U(s'))
+
+                double reward = RewardFunction.getReward(c);
+                double maxUtility = Double.NEGATIVE_INFINITY;
+
+                // for a given coordinate, need to find the max utility
+                // to do this consider all possible directions we could make a move in
+                // for each direction, multiply probability of that move * utility of that coordinate
+                // sum up all of these values and find the max among directions
+                for (Direction d: TransitionModel.CARDINAL_DIRECTIONS){
+                    double runSum = 0;
+                    // transition.getFirst() is the coordinate 
+                    // transition.getSecond() is the probability of transitioning to that coordinate 
+                    for (Pair<Coordinate, Double> transition: TransitionModel.getTransitionProbs(state, c, d)){
+                        // runSum += probability of action * utility of coordinate
+                        // System.out.println("Coordinate " + c + " direction " + d + " trans: " + transition.getFirst() + " prob: " + transition.getSecond());
+                        Coordinate curCoordinate = transition.getFirst();
+                        double curProb = transition.getSecond();
+                        // System.out.println("Coordinate: " + c + " direction " + d + " u  " + uMap.get(curCoordinate));
+                        // System.out.println("Coordinate: " + c + " direction " + d + " u' " + uPrimeMap.get(curCoordinate));
+                        runSum += (curProb * uPrimeMap.get(curCoordinate));
+                    }
+                    if (runSum > maxUtility){
+                        maxUtility = runSum;
+                    }
+                }
+
+                // update the utility of the coordinate
+                uPrimeMap.put(c, reward + (GAMMA * maxUtility));
+                // for terminmal states, utility is just the reward
+                if (c.equals(StochasticAgent.POSITIVE_TERMINAL_STATE)){
+                    uPrimeMap.put(c, reward);
+                    continue;
+                }
+                if (c.equals(StochasticAgent.NEGATIVE_TERMINAL_STATE)){
+                    uPrimeMap.put(c, reward);
+                    continue;
+                }
+
+
+                // calculate error between steps
+                if (Math.abs(uPrimeMap.get(c) - uMap.get(c)) > delta){
+                    delta = Math.abs(uPrimeMap.get(c) - uMap.get(c));
+                }
+            }
+        }
+        // System.out.println("Iterations: " + iter);
+        // update utilities to latest, converged values
+        this.setUtilities(uPrimeMap);
+        for (Coordinate c: uPrimeMap.keySet()){
+            System.out.println("Coordinate: " + c + " Utility: " + uPrimeMap.get(c));
+        }
+        return;
     }
 
     @Override
-    public void computePolicy(StateView state,
-                              HistoryView history)
+    public void computePolicy(StateView state, HistoryView history)
     {
         // compute the utilities
         this.valueIteration(state);
