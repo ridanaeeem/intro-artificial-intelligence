@@ -142,9 +142,7 @@ public class ValueIterationAgent
         }
         // System.out.println("Iterations: " + iter);
         // update utilities to latest, converged values
-        // final value ends up being the last updated uMap 
-        // because of the way the code is set up uPrimeMap gets updated and then delta is too small, 
-        // so we want to use the values right before that update calculation ???
+        // final value ends up being the last updated uMap, because of equation
         this.setUtilities(uMap);
         for (Coordinate c: uMap.keySet()){
             System.out.println("Coordinate: " + c + " Utility: " + uMap.get(c));
