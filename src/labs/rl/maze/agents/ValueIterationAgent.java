@@ -76,7 +76,7 @@ public class ValueIterationAgent
     {
         // TODO: complete me!
         Map<Coordinate, Double> uMap = getZeroMap(state);
-        Map<Coordinate, Double> uPrimeMap = getZeroMap(state);
+        Map<Coordinate, Double> uPrimeMap = getZeroMap(state);   
         double delta = Double.POSITIVE_INFINITY;
 
         int iter = 0;
@@ -88,8 +88,7 @@ public class ValueIterationAgent
                 uMap.put(c, copy);
             }
 
-            // uPrimeMap = getZeroMap(state); 
-
+            // want to find max delta across all coordinates and then reset when looking at coords again
             delta=0;
 
             for (Coordinate c: uMap.keySet()){
@@ -112,9 +111,10 @@ public class ValueIterationAgent
                         // System.out.println("Coordinate " + c + " direction " + d + " trans: " + transition.getFirst() + " prob: " + transition.getSecond());
                         Coordinate curCoordinate = transition.getFirst();
                         double curProb = transition.getSecond();
-                        // System.out.println("Coordinate: " + c + " direction " + d + " u  " + uMap.get(curCoordinate));
-                        // System.out.println("Coordinate: " + c + " direction " + d + " u' " + uPrimeMap.get(curCoordinate));
-                        runSum += (curProb * uPrimeMap.get(curCoordinate));
+                        // we are using uMap here - we want to use uMap and not uPrimeMap
+                        // because we want to look at that whole state and if we used
+                        // uPrimeMap that would be involving the new in progress state
+                        runSum += (curProb * uMap.get(curCoordinate));
                     }
                     if (runSum > maxUtility){
                         maxUtility = runSum;
@@ -122,8 +122,9 @@ public class ValueIterationAgent
                 }
 
                 // update the utility of the coordinate
-                uPrimeMap.put(c, reward + (GAMMA * maxUtility));
-                // for terminmal states, utility is just the reward
+                double newUtility = reward + (GAMMA * maxUtility);
+                uPrimeMap.put(c, newUtility);
+
                 if (c.equals(StochasticAgent.POSITIVE_TERMINAL_STATE)){
                     uPrimeMap.put(c, reward);
                     continue;
@@ -132,8 +133,7 @@ public class ValueIterationAgent
                     uPrimeMap.put(c, reward);
                     continue;
                 }
-
-
+                
                 // calculate error between steps
                 if (Math.abs(uPrimeMap.get(c) - uMap.get(c)) > delta){
                     delta = Math.abs(uPrimeMap.get(c) - uMap.get(c));
@@ -142,9 +142,12 @@ public class ValueIterationAgent
         }
         // System.out.println("Iterations: " + iter);
         // update utilities to latest, converged values
-        this.setUtilities(uPrimeMap);
-        for (Coordinate c: uPrimeMap.keySet()){
-            System.out.println("Coordinate: " + c + " Utility: " + uPrimeMap.get(c));
+        // final value ends up being the last updated uMap 
+        // because of the way the code is set up uPrimeMap gets updated and then delta is too small, 
+        // so we want to use the values right before that update calculation ???
+        this.setUtilities(uMap);
+        for (Coordinate c: uMap.keySet()){
+            System.out.println("Coordinate: " + c + " Utility: " + uMap.get(c));
         }
         return;
     }
