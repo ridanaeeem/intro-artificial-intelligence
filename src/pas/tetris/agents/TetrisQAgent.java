@@ -78,12 +78,13 @@ public class TetrisQAgent
      */
     @Override
     public Matrix getQFunctionInput(final GameView game,
-                                    final Mino potentialAction)
+        final Mino potentialAction)
     {
         Matrix flattenedImage = null;
         try
         {
             flattenedImage = game.getGrayscaleImage(potentialAction).flatten();
+            System.out.println(flattenedImage);
         } catch(Exception e)
         {
             e.printStackTrace();
@@ -109,7 +110,7 @@ public class TetrisQAgent
      */
     @Override
     public boolean shouldExplore(final GameView game,
-                                 final GameCounter gameCounter)
+        final GameCounter gameCounter)
     {
         return this.getRandom().nextDouble() <= EXPLORATION_PROB;
     }
@@ -146,9 +147,9 @@ public class TetrisQAgent
      */
     @Override
     public void trainQFunction(Dataset dataset,
-                               LossFunction lossFunction,
-                               Optimizer optimizer,
-                               long numUpdates)
+        LossFunction lossFunction,
+        Optimizer optimizer,
+        long numUpdates)
     {
         for(int epochIdx = 0; epochIdx < numUpdates; ++epochIdx)
         {
@@ -165,7 +166,7 @@ public class TetrisQAgent
 
                     optimizer.reset();
                     this.getQFunction().backwards(batch.getFirst(),
-                                                  lossFunction.backwards(YHat, batch.getSecond()));
+                    lossFunction.backwards(YHat, batch.getSecond()));
                     optimizer.step();
                 } catch(Exception e)
                 {
@@ -194,6 +195,8 @@ public class TetrisQAgent
     @Override
     public double getReward(final GameView game)
     {
+        
+
         return game.getScoreThisTurn();
     }
 
