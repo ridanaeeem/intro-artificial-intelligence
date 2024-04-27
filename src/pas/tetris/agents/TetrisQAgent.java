@@ -11,6 +11,7 @@ import java.util.Random;
 import edu.bu.tetris.agents.QAgent;
 import edu.bu.tetris.agents.TrainerAgent.GameCounter;
 import edu.bu.tetris.game.Board;
+import edu.bu.tetris.game.Block;
 import edu.bu.tetris.game.Game.GameView;
 import edu.bu.tetris.game.minos.Mino;
 import edu.bu.tetris.linalg.Matrix;
@@ -84,7 +85,7 @@ public class TetrisQAgent
         try
         {
             flattenedImage = game.getGrayscaleImage(potentialAction).flatten();
-            System.out.println(flattenedImage);
+            // System.out.println(flattenedImage);
         } catch(Exception e)
         {
             e.printStackTrace();
@@ -195,9 +196,34 @@ public class TetrisQAgent
     @Override
     public double getReward(final GameView game)
     {
-        
+        Board board = game.getBoard();
+        Block[][] blocks = board.getBoard();
 
-        return game.getScoreThisTurn();
+        int reward = 0;
+        int highestRow = board.NUM_ROWS; // highest row with a block
+
+        // System.out.println(blocks);
+        for (int i = 0; i < blocks.length; i++) {
+            for (int j = 0; j < blocks[i].length; j++) {
+                if (blocks[i][j] == null) {
+                    System.out.print("0");
+                } else {
+                    System.out.print("1");
+                    if (i < highestRow) {
+                        highestRow = i;
+                    }
+                }
+                System.out.print(" ");
+            }
+            System.out.println();
+        }
+
+        reward = highestRow - board.NUM_ROWS + 4;
+
+        System.out.println("reward: " + reward);
+        System.out.println();
+
+        return reward;
     }
 
 }
