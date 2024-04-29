@@ -58,7 +58,7 @@ public class TetrisQAgent
         // this example will create a 3-layer neural network (1 hidden layer)
         // in this example, the input to the neural network is the
         // image of the board unrolled into a giant vector
-        final int numPixelsInImage = Board.NUM_ROWS * Board.NUM_COLS;
+        final int numPixelsInImage = 3 * Board.NUM_ROWS * Board.NUM_COLS;
         final int hiddenDim = 2 * numPixelsInImage;
         final int outDim = 1;
 
@@ -94,8 +94,7 @@ public class TetrisQAgent
     {
         Matrix flattenedImage = null;
         // Matrix qFunctionInput = null;
-        if (qFunctionInput == null) qFunctionInput = Matrix.zeros(5 * Board.NUM_COLS * Board.NUM_ROWS, 1);
-        
+        if (qFunctionInput == null) qFunctionInput = Matrix.zeros(1, 3 * Board.NUM_COLS * Board.NUM_ROWS);
         try
         {
             flattenedImage = game.getGrayscaleImage(potentialAction).flatten();
@@ -104,7 +103,8 @@ public class TetrisQAgent
             e.printStackTrace();
             System.exit(-1);
         }
-
+        // System.out.println(flattenedImage.getShape());
+        // System.out.println(qFunctionInput.getShape());
         // make a row vector thats like:
         // [grayscale image value, mino type ordinal, row number, col number, rotation]
         // Block[] blocks = potentialAction.getBlocks();
@@ -121,30 +121,19 @@ public class TetrisQAgent
         Board board = game.getBoard();
         Block[][] blocks = board.getBoard();
 
-        // [grayscale image value, mino type ordinal, row number, col number, highest block]
-        // feature index (0,1,2,3,4)
+        // // [grayscale image value, mino type ordinal, highest block]
+        // // feature index (0,1,2)
         int k = 0;
-        // row (0,21) & col (0,9) index (0, NUM_ROW * NUM_COL) : {(0,0), (0,1), ... (9,21)}
         int j = 0;
-        for (int i = 0; i < 5 * Board.NUM_COLS * Board.NUM_ROWS; i++){
-            // grayscale image value
-            if (k == 0) {
-                qFunctionInput.set(i, 0, flattenedImage.get(0, j));
-            // mino type (ordinal)
-            } else if (k == 1) {
-                if (qFunctionInput.get(i - 1, 0) == 1.0){
-                    qFunctionInput.set(i, 0, (double) potentialAction.getType().ordinal());
-                } else if (qFunctionInput.get(i,0) == 0.0){
-                    qFunctionInput.set(i, 0, -1.0);
+        for (int i = 0; i < 3 * Board.NUM_COLS * Board.NUM_ROWS; i++) {
+            if (k == 0) qFunctionInput.set(0, i, flattenedImage.get(0, j));
+            else if (k == 1) {
+                if (flattenedImage.get(0, j) == 1.0) {
+                    qFunctionInput.set(0, i, (double) potentialAction.getType().ordinal());
+                } else if (flattenedImage.get(0, j) == 0.0) {
+                    qFunctionInput.set(0, i, -1.0);
                 }
-            // row number
             } else if (k == 2) {
-                qFunctionInput.set(i,0, (double) xCoords.get(j));
-            // col number
-            } else if (k == 3) {
-                qFunctionInput.set(i,0, (double) yCoords.get(j));
-            // highest row with a block (potential blockage)
-            } else if (k == 4) {
                 int highestRow = Board.NUM_ROWS;
                 for (int row = 0; row < Board.NUM_ROWS; row++) {
                     if (blocks[row][yCoords.get(j)] != null) {
@@ -152,25 +141,53 @@ public class TetrisQAgent
                         break;
                     }
                 }
-
-                qFunctionInput.set(i, 0, (double) highestRow);
-                j++; 
+                qFunctionInput.set(0, i, (double) highestRow);
+                j++;
             }
-            k++;
-            if (k==5) k = 0;
+            if (k == 3) k = 0;
+            else k++;
         }
+        // // [grayscale image value, mino type ordinal, row number, col number, highest block]
+        // // feature index (0,1,2,3,4)
+        // int k = 0;
+        // // row (0,21) & col (0,9) index (0, NUM_ROW * NUM_COL) : {(0,0), (0,1), ... (9,21)}
+        // int j = 0;
+        // for (int i = 0; i < 5 * Board.NUM_COLS * Board.NUM_ROWS; i++){
+        //     // grayscale image value
+        //     if (k == 0) {
+        //         qFunctionInput.set(i, 0, flattenedImage.get(0, j));
+        //     // mino type (ordinal)
+        //     } else if (k == 1) {
+        //         if (qFunctionInput.get(i, 0 - 1) == 1.0){
+        //             qFunctionInput.set(i, 0, (double) potentialAction.getType().ordinal());
+        //         } else if (qFunctionInput.get(i, 0) == 0.0){
+        //             qFunctionInput.set(i, 0, -1.0);
+        //         }
+        //     // row number
+        //     } else if (k == 2) {
+        //         qFunctionInput.set(i, 0, (double) xCoords.get(j));
+        //     // col number
+        //     } else if (k == 3) {
+        //         qFunctionInput.set(i, 0, (double) yCoords.get(j));
+        //     // highest row with a block (potential blockage)
+        //     } else if (k == 4) {
+        //         int highestRow = Board.NUM_ROWS;
+        //         for (int row = 0; row < Board.NUM_ROWS; row++) {
+        //             if (blocks[row][yCoords.get(j)] != null) {
+        //                 highestRow = row;
+        //                 break;
+        //             }
+        //         }
+        //         qFunctionInput.set(i, 0, (double) highestRow);
+        //         j++; 
+        //     }
+        //     k++;
+        //     if (k==5) k = 0;
+        // }
 
         // System.out.println(qFunctionInput);
         
-        // potentialAction.
-        if (qFunctionInput == null) {
-            for (int i = 0; i < 2 * Board.NUM_COLS * Board.NUM_ROWS; i++) {
-                if (i % 2 == 0) {
-                    qFunctionInput.set(i, 0, flattenedImage.get( i / 2, 0));
-                }
-            }
-        }
-
+        // System.out.println(qFunctionInput.getShape());
         // flattenedImage = game.getGrayscaleImage(potentialAction);
         // add mino type so have it be grayscale value and then minotype
         // flattenedImage = flattenedImage.append(potentialAction.getType().ordinal())
@@ -182,7 +199,7 @@ public class TetrisQAgent
         // System.out.println("NEW TURN");
         // System.out.println();
 
-        return flattenedImage;
+        return qFunctionInput;
     }
 
     /**
@@ -204,7 +221,37 @@ public class TetrisQAgent
     public boolean shouldExplore(final GameView game,
         final GameCounter gameCounter)
     {
-        return this.getRandom().nextDouble() <= EXPLORATION_PROB;
+        // return this.getRandom().nextDouble() <= EXPLORATION_PROB;
+        // return true if there is a blockage
+        Board board = game.getBoard();
+        Block[][] blocks = board.getBoard();
+        
+        // look in first row to see if any potential clears have been blocked
+        int blockages = 0;
+        for (int i = 0; i < Board.NUM_COLS; i++) {
+            if (blocks[Board.NUM_ROWS - 1][i] == null && blocks[Board.NUM_ROWS - 2][i] == null) {
+                for (int j = 0; j < Board.NUM_ROWS - 1; j++) {
+                    if (blocks[j][i] != null) {
+                        blockages += 1;
+                        break;
+                    }
+                }
+            }
+        }
+        // for (int i = 0; i < Board.NUM_COLS; i++) {
+        //     if (blocks[Board.NUM_ROWS - 1][i] == null) {
+        //         for (int j = 0; j < Board.NUM_ROWS; j++) {
+        //             if (blocks[j][i] != null) {
+        //                 blockages += 1;
+        //                 break;
+        //             }
+        //         }
+        //     }
+        // }
+
+        if (blockages > 2) return true;
+        return false;
+
     }
 
     /**
@@ -220,7 +267,59 @@ public class TetrisQAgent
     public Mino getExplorationMove(final GameView game)
     {
         int randIdx = this.getRandom().nextInt(game.getFinalMinoPositions().size());
-        return game.getFinalMinoPositions().get(randIdx);
+        List<Mino> possibleActions = game.getFinalMinoPositions();
+
+        int bestAction = 0;
+        int consecutiveMax = 0;
+        
+        for (int i = 0; i < possibleActions.size(); i++) {
+            Mino mino = possibleActions.get(i);
+            Matrix grayscale;
+            Block[][] blocks = game.getBoard().getBoard();
+            List<Integer> options = new ArrayList<Integer>();
+            try
+            {
+                grayscale = game.getGrayscaleImage(mino);
+                for (int j = 0; j < Board.NUM_ROWS; j++) {
+                    // see if row contains 1.0
+                    for (int k = 0; k < Board.NUM_COLS; k++) {
+                        if (grayscale.get(j, k) == 1.0) {
+                            options.add(j);
+                            break;
+                        }
+                    }
+                }
+
+                for (int k : options) {
+                    int left = 0;
+                    int right = left;
+                    while (right < Board.NUM_COLS - 1) {
+                        if (grayscale.get(k, left) == 0.0){
+                            left++;
+                            right = left;
+                        }
+                        if (grayscale.get(k, right) != 0.0){
+                            if (right - left + 1 > consecutiveMax){
+                                consecutiveMax = right - left + 1;
+                                bestAction = i;
+                            } 
+                            consecutiveMax = Math.max(consecutiveMax, right - left + 1);
+                            if (right < Board.NUM_COLS - 1) right++;
+                            else break;
+                        }
+                        if (blocks[k][right] == null){
+                            left = right;
+                        }
+                    }
+                }
+            } catch(Exception e)
+            {
+                e.printStackTrace();
+                System.exit(-1);
+            }
+            
+        }
+        return game.getFinalMinoPositions().get(bestAction);
     }
 
     /**
@@ -318,8 +417,8 @@ public class TetrisQAgent
         int consecutive3 = 0;
         int consecutive4 = 0;
 
-        // check for blockages also
-        for (int i = 0; i < 4; i++){
+        // check for consecutives
+        for (int i = 0; i < Board.NUM_ROWS; i++){
             int left = 0;
             int right = left;
             while (right < Board.NUM_COLS - 1) {
@@ -328,13 +427,18 @@ public class TetrisQAgent
                     right = left;
                 }
                 if (blocks[Board.NUM_ROWS - i - 1][right] != null){
-                    if (i == 1) consecutive1++;
-                    if (i == 2) consecutive2++;
-                    if (i == 3) consecutive3++;
-                    if (i == 4) consecutive4++;
+                    if (i == 0) consecutive1 = Math.max(consecutive1, right - left + 1);
+                    if (i == 1) consecutive2 = Math.max(consecutive2, right - left + 1);
+                    if (i == 2) consecutive3 = Math.max(consecutive3, right - left + 1);
+                    if (i == 3) consecutive4 = Math.max(consecutive4, right - left + 1);
                     consecutiveMax = Math.max(consecutiveMax, right - left + 1);
                     if (right < Board.NUM_COLS - 1) right++;
                     else break;
+                }
+                if (right - left + 1 == 8){
+                    reward += 100;
+                } else if (right - left + 1 == 7){
+                    reward += 50;
                 }
                 if (blocks[Board.NUM_ROWS - i - 1][right] == null){
                     left = right;
@@ -344,10 +448,13 @@ public class TetrisQAgent
 
         // check for blockages
         for (int i = 0; i < Board.NUM_COLS; i++) {
-            if (blocks[Board.NUM_ROWS - 1][i] == null) {
-                for (int j = 0; j < Board.NUM_ROWS; j++) {
+            if (blocks[Board.NUM_ROWS - 1][i] == null && blocks[Board.NUM_ROWS - 2][i] == null) {
+                for (int j = 0; j < Board.NUM_ROWS - 1; j++) {
                     if (blocks[j][i] != null) {
-                        reward -= 50;
+                        reward -= (Board.NUM_ROWS - j) * 10;
+                        // if (j < 10) reward -= 100;
+                        // else reward -= 25;
+                        // System.out.println("BLOCKAGE" + i + " " + j);
                         break;
                     }
                 }
@@ -355,8 +462,8 @@ public class TetrisQAgent
         }
         double factor = 0.75;
         // reward += (int) (consecutive1 * Math.pow(factor, 1) + consecutive2 * Math.pow(factor, 2) + consecutive3 * Math.pow(factor, 3) + consecutive4 * Math.pow(factor, 4));
-        reward += 25 * (consecutive1 + consecutive2 + consecutive3 + consecutive4);
-        reward += 5 * (highestRow - board.NUM_ROWS + 5);
+        reward += (consecutive1 * consecutive2 * consecutive3 * consecutive4);
+        reward += (highestRow - board.NUM_ROWS + 5);
         // reward = consecutiveMax;
         // reward = highestRow * (highestRow - board.NUM_ROWS + 10);
         if (game.didAgentLose()) {
