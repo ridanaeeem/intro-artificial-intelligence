@@ -266,7 +266,7 @@ public class TetrisQAgent
     @Override
     public Mino getExplorationMove(final GameView game)
     {
-        int randIdx = this.getRandom().nextInt(game.getFinalMinoPositions().size());
+        // int randIdx = this.getRandom().nextInt(game.getFinalMinoPositions().size());
         List<Mino> possibleActions = game.getFinalMinoPositions();
 
         int bestAction = 0;
