@@ -228,7 +228,7 @@ public class TetrisQAgent
         //     if (k==5) k = 0;
         // }
 
-        System.out.println(qFunctionInput);
+        // System.out.println(qFunctionInput);
         
         // System.out.println(qFunctionInput.getShape());
         // flattenedImage = game.getGrayscaleImage(potentialAction);
@@ -410,6 +410,8 @@ public class TetrisQAgent
         }
     }
 
+    int highestRow;
+    int lastHighestRow;
     /**
      * This method is where you will devise your own reward signal. Remember, the larger
      * the number, the more "pleasurable" it is to the model, and the smaller the number,
@@ -431,9 +433,22 @@ public class TetrisQAgent
         Board board = game.getBoard();
         Block[][] blocks = board.getBoard();
 
+        boolean reset = false;
+        for (int i = 0; i < Board.NUM_COLS; i++) {
+            if (blocks[Board.NUM_ROWS - 1][i] != null) {
+                reset = false;
+                break;
+            }
+            reset = true;
+        }
         int reward = 0;
         // highest row with a block
-        int highestRow = Board.NUM_ROWS; 
+        if (reset || game.didAgentLose() || highestRow == 0){
+            highestRow = Board.NUM_ROWS - 1;
+            System.out.println("RESET");
+        } else {
+            lastHighestRow = highestRow;
+        }
 
         // highest = bad
         for (int i = 0; i < blocks.length; i++) {
@@ -450,6 +465,16 @@ public class TetrisQAgent
             }
             // reward += (i * consecutiveMax);
             System.out.println();
+        }
+
+        System.out.println("HIGHEST ROW: " + highestRow + " LAST HIGHEST ROW: " + lastHighestRow);
+        if (highestRow > lastHighestRow) {
+            System.out.println("ROW CLEAR");
+            reward += 100;
+        } else if (highestRow == lastHighestRow) {
+            reward += 50;
+        } else {
+            reward -= 10;
         }
 
         // consecutive 
@@ -478,9 +503,11 @@ public class TetrisQAgent
                     else break;
                 }
                 if (right - left + 1 == 8){
-                    reward += 100;
+                    if (i < 4) reward += 200;
+                    else reward += 50;
                 } else if (right - left + 1 == 7){
-                    reward += 50;
+                    if (i < 4) reward += 10;
+                    else reward += 25;
                 }
                 if (blocks[Board.NUM_ROWS - i - 1][right] == null){
                     left = right;
