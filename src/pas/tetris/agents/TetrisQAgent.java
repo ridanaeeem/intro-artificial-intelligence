@@ -90,6 +90,8 @@ public class TetrisQAgent
 
     // Matrix qFunctionInput;
 
+    int rowClears;
+
     @Override
     public Matrix getQFunctionInput(final GameView game,
         final Mino potentialAction)
@@ -100,6 +102,18 @@ public class TetrisQAgent
 
         try{ 
             grayscaleImage = game.getGrayscaleImage(potentialAction);
+
+            rowClears = 0;
+            for (int i = 0; i < Board.NUM_ROWS; i++) {
+                int counter = 0;
+                for (int j = 0; j < Board.NUM_COLS; j++) {
+                    if (grayscaleImage.get(i,j) != 0.0) {
+                        counter ++;
+                    } 
+                }
+                if (counter == Board.NUM_COLS) rowClears++;
+            }
+
             for (int i = 0; i < Board.NUM_COLS; i++){
                 // bottom = empty space
                 int bottom = Board.NUM_ROWS - 1;
@@ -489,26 +503,33 @@ public class TetrisQAgent
         for (int i = 0; i < blocks.length; i++) {
             for (int j = 0; j < blocks[i].length; j++) {
                 if (blocks[i][j] == null) {
-                    // System.out.print(".");
+                    System.out.print(".");
                 } else {
-                    // System.out.print("@");
+                    System.out.print("@");
                     if (i < highestRow) {
                         highestRow = i;
                     }
                 }
-                // System.out.print(" ");
+                System.out.print(" ");
             }
             // reward += (i * consecutiveMax);
-            // System.out.println();
+            System.out.println();
         }
 
-        // System.out.println("HIGHEST ROW: " + highestRow + " LAST HIGHEST ROW: " + lastHighestRow);
-        if (highestRow > lastHighestRow) {
-            // System.out.println("ROW CLEAR");
+        // System.out.println("HIGHEST ROW: " + highestRow + " lastHighestRow: " + lastHighestRow);
+        // if (highestRow > lastHighestRow) {
+        //     System.out.println("ROW CLEAR");
+        //     reward += 1000;
+        // } else if (highestRow == lastHighestRow) {
+        //     reward += 10;
+        // } 
+
+        if (rowClears > 0) {
             reward += 1000;
-        } else if (highestRow == lastHighestRow) {
-            reward += 10;
-        } 
+            System.out.println("ROW CLEAR");
+        } else {
+            reward -= 100;
+        }
 
         // consecutive 
         int consecutiveMax = 0;
@@ -652,9 +673,9 @@ public class TetrisQAgent
 
         reward += game.getScoreThisTurn() * 1000;
         reward += game.getTotalScore() * 100;
-        // if (game.getScoreThisTurn() > 0) System.out.println("JUST EARNED " + game.getScoreThisTurn());
-        // System.out.println("reward: " + reward); 
-        // System.out.println();
+        if (game.getScoreThisTurn() > 0) System.out.println("JUST EARNED " + game.getScoreThisTurn());
+        System.out.println("reward: " + reward); 
+        System.out.println();
 
         return reward;
     }
