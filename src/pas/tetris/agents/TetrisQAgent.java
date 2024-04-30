@@ -58,7 +58,7 @@ public class TetrisQAgent
         // this example will create a 3-layer neural network (1 hidden layer)
         // in this example, the input to the neural network is the
         // image of the board unrolled into a giant vector
-        final int numPixelsInImage = Board.NUM_ROWS;
+        final int numPixelsInImage = Board.NUM_COLS;
         final int hiddenDim = 3 * numPixelsInImage;
         final int outDim = 1;
 
@@ -94,39 +94,33 @@ public class TetrisQAgent
     {
         // Matrix flattenedImage = null;
         Matrix grayscaleImage;
-        Matrix qFunctionInput = Matrix.zeros(1, Board.NUM_ROWS);
+        Matrix qFunctionInput = Matrix.zeros(1, Board.NUM_COLS);
 
         try{ 
             grayscaleImage = game.getGrayscaleImage(potentialAction);
-            for (int i = 0; i < Board.NUM_ROWS; i++){
-                int left = 0;
-                int right = left;
-                double value = 1;
-                int consecutive0 = 0;
-                int consecutive1 = 0;
-                while (right < Board.NUM_COLS - 1) {
-                    if (grayscaleImage.get(i, left) == 0.0){
-                        consecutive0++;
-                        left++;
-                        right = left;
-                        value /= (2 * consecutive0);
+            for (int i = 0; i < Board.NUM_COLS; i++){
+                // bottom = empty space
+                int bottom = Board.NUM_ROWS - 1;
+                // top = occupied space
+                int top = bottom;
+                int biggestDifference = 0;
+
+                while (top > 0) {
+                    if (grayscaleImage.get(bottom, i) != 0.0){
+                        bottom--;
+                        top = bottom;
                     }
-                    if (grayscaleImage.get(i, right) != 0.0){
-                        if (right < Board.NUM_COLS - 1){
-                            right++;
-                            consecutive1++;
-                            consecutive0 = 0;
-                            value *= consecutive1;
+                    else if (grayscaleImage.get(top, i) == 0.0){
+                        top--;
+                    }
+                    else if (grayscaleImage.get(top, i) != 0.0){
+                        if (bottom - top > biggestDifference){
+                            biggestDifference = bottom - top;
                         }
-                        else break;
-                    }
-                    if (grayscaleImage.get(i, right) == 0.0){
-                        left = right;
-                        consecutive1 = 0;
+                        bottom = top;
                     }
                 }
-                value /= (0.5 * (Board.NUM_ROWS - i));
-                qFunctionInput.set(0, i, value);
+                qFunctionInput.set(0, i, biggestDifference);
             }
         }
         catch(Exception e)
@@ -134,6 +128,45 @@ public class TetrisQAgent
             e.printStackTrace();
             System.exit(-1);
         }
+
+        // try{ 
+        //     grayscaleImage = game.getGrayscaleImage(potentialAction);
+        //     for (int i = 0; i < Board.NUM_ROWS; i++){
+        //         int left = 0;
+        //         int right = left;
+        //         double value = 1;
+        //         int consecutive0 = 0;
+        //         int consecutive1 = 0;
+        //         while (right < Board.NUM_COLS - 1) {
+        //             if (grayscaleImage.get(i, left) == 0.0){
+        //                 consecutive0++;
+        //                 left++;
+        //                 right = left;
+        //                 value /= (2 * consecutive0);
+        //             }
+        //             if (grayscaleImage.get(i, right) != 0.0){
+        //                 if (right < Board.NUM_COLS - 1){
+        //                     right++;
+        //                     consecutive1++;
+        //                     consecutive0 = 0;
+        //                     value *= consecutive1;
+        //                 }
+        //                 else break;
+        //             }
+        //             if (grayscaleImage.get(i, right) == 0.0){
+        //                 left = right;
+        //                 consecutive1 = 0;
+        //             }
+        //         }
+        //         value /= (0.5 * (Board.NUM_ROWS - i));
+        //         qFunctionInput.set(0, i, value);
+        //     }
+        // }
+        // catch(Exception e)
+        // {
+        //     e.printStackTrace();
+        //     System.exit(-1);
+        // }
 
         
         // if (qFunctionInput == null) qFunctionInput = Matrix.zeros(1, 3 * Board.NUM_COLS * Board.NUM_ROWS);
@@ -228,7 +261,7 @@ public class TetrisQAgent
         //     if (k==5) k = 0;
         // }
 
-        // System.out.println(qFunctionInput);
+        System.out.println(qFunctionInput);
         
         // System.out.println(qFunctionInput.getShape());
         // flattenedImage = game.getGrayscaleImage(potentialAction);
@@ -341,7 +374,7 @@ public class TetrisQAgent
                             left++;
                             right = left;
                         }
-                        if (grayscale.get(k, right) != 0.0){
+                        else if (grayscale.get(k, right) != 0.0){
                             if (right - left + 1 > consecutiveMax){
                                 consecutiveMax = right - left + 1;
                                 bestAction = i;
@@ -349,7 +382,7 @@ public class TetrisQAgent
                             if (right < Board.NUM_COLS - 1) right++;
                             else break;
                         }
-                        if (blocks[k][right] == null){
+                        else if (blocks[k][right] == null){
                             left = right;
                         }
                     }
@@ -445,7 +478,7 @@ public class TetrisQAgent
         // highest row with a block
         if (reset || game.didAgentLose() || highestRow == 0){
             highestRow = Board.NUM_ROWS - 1;
-            System.out.println("RESET");
+            // System.out.println("RESET");
         } else {
             lastHighestRow = highestRow;
         }
@@ -467,15 +500,13 @@ public class TetrisQAgent
             System.out.println();
         }
 
-        System.out.println("HIGHEST ROW: " + highestRow + " LAST HIGHEST ROW: " + lastHighestRow);
+        // System.out.println("HIGHEST ROW: " + highestRow + " LAST HIGHEST ROW: " + lastHighestRow);
         if (highestRow > lastHighestRow) {
-            System.out.println("ROW CLEAR");
+            // System.out.println("ROW CLEAR");
             reward += 100;
         } else if (highestRow == lastHighestRow) {
-            reward += 50;
-        } else {
-            reward -= 10;
-        }
+            reward += 10;
+        } 
 
         // consecutive 
         int consecutiveMax = 0;
@@ -502,16 +533,16 @@ public class TetrisQAgent
                     if (right < Board.NUM_COLS - 1) right++;
                     else break;
                 }
-                if (right - left + 1 == 8){
-                    if (i < 4) reward += 200;
-                    else reward += 50;
-                } else if (right - left + 1 == 7){
-                    if (i < 4) reward += 10;
-                    else reward += 25;
-                }
                 if (blocks[Board.NUM_ROWS - i - 1][right] == null){
                     left = right;
                 }
+                // if (right - left + 1 == 8){
+                //     if (i < 4) reward += 200;
+                //     else reward += 50;
+                // } else if (right - left + 1 == 7){
+                //     if (i < 4) reward += 10;
+                //     else reward += 25;
+                // }
             }
         }
 
@@ -520,7 +551,7 @@ public class TetrisQAgent
             if (blocks[Board.NUM_ROWS - 1][i] == null && blocks[Board.NUM_ROWS - 2][i] == null) {
                 for (int j = 0; j < Board.NUM_ROWS - 1; j++) {
                     if (blocks[j][i] != null) {
-                        reward -= (Board.NUM_ROWS - j) * 10;
+                        reward -= (Board.NUM_ROWS - j) * 20;
                         // if (j < 10) reward -= 100;
                         // else reward -= 25;
                         // System.out.println("BLOCKAGE" + i + " " + j);
@@ -541,7 +572,53 @@ public class TetrisQAgent
         }
         // if (game.getScoreThisTurn() > 0) System.out.println("JUST EARNED " + game.getScoreThisTurn());
 
-        reward += game.getScoreThisTurn() * 100;
+        // look for spots for I-block
+        // need a section where every block in row is occupied except the same one in 4 consecutive rows
+        for (int i = Board.NUM_ROWS - 1; i > 3; i--){
+            int count = 0;
+            int empty = 0;
+            int potentialClears = 0;
+            for (int j = 0; j < Board.NUM_COLS; j++){
+                if (blocks[i][j] != null) count++;
+                else empty = j;
+            }
+            if (count == Board.NUM_COLS - 1){
+                if (blocks[i - 1][empty] == null && blocks[i - 2][empty] == null && blocks[i - 3][empty] == null && blocks[i - 4][empty] == null){
+                    potentialClears++;
+                    count = 0;
+                    for (int j = 0; j < Board.NUM_COLS; j++){
+                        if (blocks[i - 1][j] != null) count++;
+                    }
+                    if (count == Board.NUM_COLS - 1) potentialClears++;
+                    count = 0;
+
+                    for (int j = 0; j < Board.NUM_COLS; j++){
+                        if (blocks[i - 2][j] != null) count++;
+                    }
+                    if (count == Board.NUM_COLS - 1) potentialClears++;
+
+                    count = 0;
+                    for (int j = 0; j < Board.NUM_COLS; j++){
+                        if (blocks[i - 3][j] != null) count++;
+                    }
+                    if (count == Board.NUM_COLS - 1) potentialClears++;
+
+                    // check if there is a blockage at empty spot
+                    count = 0;
+                    for (int j = i; j > 3; j--){
+                        if (blocks[j][empty] != null){ 
+                            reward -= 100; 
+                            potentialClears = 0;
+                            break;
+                        }
+                    } 
+                    reward += (potentialClears * 100);
+                    // if (potentialClears > 0) System.out.println("I-BLOCK SPOT");
+                }
+            }
+        }
+
+        reward += game.getScoreThisTurn() * 1000;
         System.out.println("reward: " + reward);
         System.out.println();
 
