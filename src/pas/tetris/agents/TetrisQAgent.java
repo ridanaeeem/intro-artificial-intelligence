@@ -503,17 +503,17 @@ public class TetrisQAgent
         for (int i = 0; i < blocks.length; i++) {
             for (int j = 0; j < blocks[i].length; j++) {
                 if (blocks[i][j] == null) {
-                    System.out.print(".");
+                    // System.out.print(".");
                 } else {
-                    System.out.print("@");
+                    // System.out.print("@");
                     if (i < highestRow) {
                         highestRow = i;
                     }
                 }
-                System.out.print(" ");
+                // System.out.print(" ");
             }
             // reward += (i * consecutiveMax);
-            System.out.println();
+            // System.out.println();
         }
 
         // System.out.println("HIGHEST ROW: " + highestRow + " lastHighestRow: " + lastHighestRow);
@@ -525,11 +525,9 @@ public class TetrisQAgent
         // } 
 
         if (rowClears > 0) {
-            reward += 1000;
-            System.out.println("ROW CLEAR");
-        } else {
-            reward -= 100;
-        }
+            reward += (rowClears * 1000);
+            // System.out.println("ROW CLEAR");
+        } 
 
         // consecutive 
         int consecutiveMax = 0;
@@ -638,21 +636,21 @@ public class TetrisQAgent
                         if (blocks[i - 1][j] != null) count++;
                     }
                     if (count == Board.NUM_COLS - 1) potentialClears++;
-                    if (count == Board.NUM_COLS) reward += 1000;
+                    if (count == Board.NUM_COLS) reward += 500;
                     
                     count = 0;
                     for (int j = 0; j < Board.NUM_COLS; j++){
                         if (blocks[i - 2][j] != null) count++;
                     }
                     if (count == Board.NUM_COLS - 1) potentialClears++;
-                    if (count == Board.NUM_COLS) reward += 1000;
+                    if (count == Board.NUM_COLS) reward += 500;
 
                     count = 0;
                     for (int j = 0; j < Board.NUM_COLS; j++){
                         if (blocks[i - 3][j] != null) count++;
                     }
                     if (count == Board.NUM_COLS - 1) potentialClears++;
-                    if (count == Board.NUM_COLS) reward += 1000;
+                    if (count == Board.NUM_COLS) reward += 500;
 
                     // check if there is a blockage at empty spot
                     count = 0;
@@ -664,18 +662,18 @@ public class TetrisQAgent
                         }
                     } 
                     reward += (potentialClears * 100);
-                    if (count == Board.NUM_COLS) reward += 1000;
+                    if (count == Board.NUM_COLS) reward += 500;
 
                     // if (potentialClears > 0) System.out.println("I-BLOCK SPOT");
                 }
             }
         }
 
-        reward += game.getScoreThisTurn() * 1000;
+        reward += game.getScoreThisTurn() * 2000;
         reward += game.getTotalScore() * 100;
-        if (game.getScoreThisTurn() > 0) System.out.println("JUST EARNED " + game.getScoreThisTurn());
-        System.out.println("reward: " + reward); 
-        System.out.println();
+        // if (game.getScoreThisTurn() > 0) System.out.println("JUST EARNED " + game.getScoreThisTurn());
+        // System.out.println("reward: " + reward); 
+        // System.out.println();
 
         return reward;
     }
