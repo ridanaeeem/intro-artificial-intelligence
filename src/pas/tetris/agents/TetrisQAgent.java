@@ -60,14 +60,14 @@ public class TetrisQAgent
         // image of the board unrolled into a giant vector
         final int numPixelsInImage = Board.NUM_COLS;
         final int hiddenDim = 3 * numPixelsInImage;
-        final int hiddenDim2 = 3 * numPixelsInImage;
+        final int hiddenDim2 = 2 * numPixelsInImage;
         final int outDim = 1;
 
         Sequential qFunction = new Sequential();
         qFunction.add(new Dense(numPixelsInImage, hiddenDim));
         qFunction.add(new Tanh());
         qFunction.add(new Sigmoid());
-        qFunction.add(new Dense(hiddenDim2, outDim));
+        qFunction.add(new Dense(hiddenDim, outDim));
 
         return qFunction;
     }
@@ -341,6 +341,7 @@ public class TetrisQAgent
             }
         }
 
+        if (this.getRandom().nextDouble() <= EXPLORATION_PROB) return true;
         if (blockages < 1 || blockages > 4 || highestRow < 5) return true;
         return false;
 
@@ -458,7 +459,7 @@ public class TetrisQAgent
             }
         }
     }
-
+    boolean canPrint = false;
     int highestRow;
     int lastHighestRow;
     /**
@@ -503,31 +504,24 @@ public class TetrisQAgent
         for (int i = 0; i < blocks.length; i++) {
             for (int j = 0; j < blocks[i].length; j++) {
                 if (blocks[i][j] == null) {
-                    // System.out.print(".");
+                    if (canPrint) System.out.print(".");
                 } else {
-                    // System.out.print("@");
+                    if (canPrint) System.out.print("@");
                     if (i < highestRow) {
                         highestRow = i;
                     }
                 }
-                // System.out.print(" ");
+                if (canPrint) System.out.print(" ");
             }
             // reward += (i * consecutiveMax);
-            // System.out.println();
+            if (canPrint) System.out.println();
         }
 
-        // System.out.println("HIGHEST ROW: " + highestRow + " lastHighestRow: " + lastHighestRow);
-        // if (highestRow > lastHighestRow) {
-        //     System.out.println("ROW CLEAR");
-        //     reward += 1000;
-        // } else if (highestRow == lastHighestRow) {
-        //     reward += 10;
+        // if (rowClears > 0) {
+        //     // reward += (rowClears * 1000);
+        //     reward += rowClears;
+        //     // System.out.println("ROW CLEAR");
         // } 
-
-        if (rowClears > 0) {
-            reward += (rowClears * 1000);
-            // System.out.println("ROW CLEAR");
-        } 
 
         // consecutive 
         int consecutiveMax = 0;
@@ -574,12 +568,13 @@ public class TetrisQAgent
                 for (int j = 0; j < Board.NUM_ROWS - 1; j++) {
                     if (blocks[j][i] != null) {
                         blockages += 1;
-                        reward -= blockages * 10;
+                        // reward -= blockages * 10;
                         break;
                     }
                 }
             }
         }
+        
         for (int i = 0; i < Board.NUM_COLS; i++){
             // bottom = empty space
             int bottom = Board.NUM_ROWS - 1;
@@ -602,21 +597,22 @@ public class TetrisQAgent
                     bottom = top;
                 }
             }
-            reward -= biggestDifference * biggestDifference;
+            // reward -= biggestDifference * biggestDifference;
+            reward -= (biggestDifference/Board.NUM_COLS)/Board.NUM_COLS;
         }
 
         double factor = 0.75;
         // reward += (int) (consecutive1 * Math.pow(factor, 1) + consecutive2 * Math.pow(factor, 2) + consecutive3 * Math.pow(factor, 3) + consecutive4 * Math.pow(factor, 4));
-        reward += (consecutive1 * consecutive2 * consecutive3 * consecutive4);
-        reward += 200 * (highestRow - board.NUM_ROWS + 5);
-        if (highestRow < 5) reward -= 1000;
+        // reward += (consecutive1 * consecutive2 * consecutive3 * consecutive4);
+        // reward += 200 * (highestRow - board.NUM_ROWS + 5);
+        // if (highestRow < 5) reward -= 1000;
         // reward = consecutiveMax;
         // reward = highestRow * (highestRow - board.NUM_ROWS + 10);
         if (game.didAgentLose()) {
             reward -= 1000;
             // System.out.println("LOSE");
         }
-        // if (game.getScoreThisTurn() > 0) System.out.println("JUST EARNED " + game.getScoreThisTurn());
+        if (game.getScoreThisTurn() > 0 && (canPrint)) System.out.println("JUST EARNED " + game.getScoreThisTurn());
 
         // look for spots for I-block
         // need a section where every block in row is occupied except the same one in 4 consecutive rows
@@ -656,12 +652,14 @@ public class TetrisQAgent
                     count = 0;
                     for (int j = i; j > 3; j--){
                         if (blocks[j][empty] != null){ 
-                            reward -= 100; 
+                            // reward -= 100; 
+                            reward -= 1;
                             potentialClears = 0;
                             break;
                         }
                     } 
-                    reward += (potentialClears * 100);
+                    // reward += (potentialClears * 100);
+                    reward += (potentialClears * .5);
                     if (count == Board.NUM_COLS) reward += 500;
 
                     // if (potentialClears > 0) System.out.println("I-BLOCK SPOT");
@@ -669,11 +667,20 @@ public class TetrisQAgent
             }
         }
 
-        reward += game.getScoreThisTurn() * 2000;
-        reward += game.getTotalScore() * 100;
+        // reward += game.getScoreThisTurn() * 2000;
+        // reward += game.getTotalScore() * 100;
         // if (game.getScoreThisTurn() > 0) System.out.println("JUST EARNED " + game.getScoreThisTurn());
-        // System.out.println("reward: " + reward); 
-        // System.out.println();
+
+        reward += (game.getScoreThisTurn()) * 1000;
+        reward += (game.getTotalScore()) * 50;
+        if (rowClears > 0) reward += (rowClears * 1000); 
+        reward += ((highestRow - Board.NUM_ROWS + 5)) * 100;
+        if (highestRow < 5) reward -= 5000;
+        reward += (consecutive1 + consecutive2 + consecutive3 + consecutive4) * 50;
+        reward -= (blockages * 100);
+
+        if (canPrint) System.out.println("reward: " + reward); 
+        if (canPrint) System.out.println();
 
         return reward;
     }
